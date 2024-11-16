@@ -1,0 +1,46 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Routes</title>   
+     <link rel="stylesheet" href="{% static 'student.css' %}">
+    
+    
+</head>
+<body>
+    <div class="container">
+        <h2>Add and Manage Student</h2>
+        <table class="route-table">
+            <form method="post">
+                {% csrf_token %}
+
+          
+                <tr>
+                    <th>Sl.No</th>
+                    <th>Adm.No</th>
+                    <th>Name</th>
+                    <th>Dept</th>
+                    <th>E-mail</th>
+                    <th>Actions</th>
+                </tr>
+            
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <button class="edit-btn">Edit</button>
+                        <button class="delete-btn">Delete</button>
+                    </td>
+                </tr>
+                
+           
+        </table>
+        <button class="add-btn"> <a href="{% url 'addstudent_page' %}">Add</a></button>
+    </div>
+</form>
+</body>
+</html>

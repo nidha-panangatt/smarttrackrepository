@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Charges</title>
+    <link rel="stylesheet" href="{% static 'charges1.css' %}">
+
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <form action=" " method="post">
+            {%csrf_token %}
+            <label for="station">Station:</label>
+            <select id="station" name="station" required>
+                <option value="" disabled selected>Select Station</option>
+                <option value="station1">Station 1</option>
+                <option value="station2">Station 2</option>
+                <!-- Add more station options as needed -->
+            </select>
+
+            <label for="charge">Charge:</label>
+            <input type="text" id="charge" name="charge" placeholder="Enter charge" required>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+</body>
+</html>

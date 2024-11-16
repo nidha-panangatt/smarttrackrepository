@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Routes</title>
+   <link rel="stylesheet" href="{% static 'route.css' %}">
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Add and Manage Routes</h2>
+        <table class="route-table">
+            <thead>
+                <tr>
+                    <th>SI.No</th>
+                    <th>Route</th>
+                    <th>Bus No</th>
+                    <th>Station</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><span class="status active">Active</span></td>
+                    <td>
+                        <a href="delete_route.html"><button class="edit-btn">Edit</button></a>
+                        <a href="delete_route.html"><button class="delete-btn">Delete</button></a>
+                    </td>
+                </tr>
+               
+                
+            </tbody>
+        </table>
+        <button class="add-btn">Add Route</button>
+    </div>
+</body>
+</html>
+

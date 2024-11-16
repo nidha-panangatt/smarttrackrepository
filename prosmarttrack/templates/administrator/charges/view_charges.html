@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Routes</title>
+    <link rel="stylesheet" href="{% static 'charges.css' %}">
+
+    
+</head>
+<body>
+    <div class="container">
+        <h2>Add and Manage Charges</h2>
+        <table border="2" class="route-table">
+           
+                <tr>
+                    <th>S.No</th>
+                    <th>Route</th>
+                    <th>Bus No</th>
+                    <th>Station</th>
+                    <th>Monthly Charges</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <button class="edit-btn">Edit</button>
+                        <button class="delete-btn">Delete</button>
+                    </td>
+                </tr>
+                
+                <!-- Additional rows can be added here -->
+            </tbody>
+        </table>
+        <button class="add-btn">Add </button>
+    </div>
+</body>
+</html>
