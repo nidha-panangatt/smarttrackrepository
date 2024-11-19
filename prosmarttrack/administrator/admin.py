@@ -7,12 +7,14 @@ from administrator.models import *
 admin.site.register(BuscoordinatorsTable),
 admin.site.register(TeacherTable),
 admin.site.register(GuardianTable),
+admin.site.register(BusstaffTable),
 admin.site.register(AddstudentTable),
 
 admin.site.register(RouteTable),
 admin.site.register(StationTable),
 admin.site.register(StudentTable),
-admin.site.register(TranspoTable)
+admin.site.register(TranspoTable),
+admin.site.register(BusdetailsTable)
 
 
 

@@ -1,0 +1,32 @@
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Coordinators Form</title> 
+    <link rel="stylesheet" href="{% static 'det1.css' %}">
+    
+    
+</head >
+<body>
+
+    <div class="form-container">
+        <h2>Bus details</h2>
+        <form action=" " method="post">
+            {%csrf_token %}
+            <label for="route">Route</label>
+            <input type="text" id="route" name="route" required>
+
+            <label for="vehno">Vehicle no:</label>
+            <input type="text" id="vehno" name="vehno" required>
+
+            <label for="staff">staff</label>
+            <input type="text" id="staff" name="staff" required>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+</body>
+</html>

@@ -1,96 +1,138 @@
-<!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-*{
-    margin: 0;
-    padding:0;
-    box-sizing:border-box;
-    font-family: sans-serif;
-
-
-}
-.header{
-    width:100%;
-    height:100px;
-    background-color:black;
-    color:rgb(240, 248, 255);
-    text-align:center;
-    line-height:100px;
-    margin-bottom: 20px;
-
-}
-nav{
-    width:100%;
-    height:50px;
-    background-color:black;
-    color: #fff;
-    line-height:50px;
-    text-align: center;
-    margin-bottom: 20px;
-
-}
-nav a{
-    text-decoration: none;
-    color: #fff;
-    font-size: 20px;
-    display:inline-block;
-    padding: 0 25px;
-}
-section{
-    display:flex;
-    width: 100%;
-    height: 500px;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background-color: #ccc;
-    margin-bottom: 20px;
-
-}
-.box1,.box2,.box3,.box4{
-
-    width:250px;
-    height:250px;
-    background-color: #333;
-    color:white;
-    font-size: 19px;
-    text-align:center;
-    line-height: 450px;
-    border-radius:20px;
-    margin:10px;
-}
-a{
-    text-decoration: none;
-    color: #fff;
-    font-size: 20px;
-}
-
-    </style>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 </head>
 <body>
-    <div class="header">
-    <h1>SMART TRACK</h1>
-</div>
-    <nav>
-        <a href="#">HOME</a>
-        <a href="#">ABOUT</a>
-        <a href="#">CONTACT</a>
-    </nav>
-    <section>
-            <div class="box1"><a href="{% url 'vteacher_page' %}">TEACHERS</a></div>
-            <div class="box2"><a href="{% url 'vbusco_page' %}">BUS COORDINATORS</a></div>
-            <br>
-            <div class="box3"><a href="{% url 'vstudent_page' %}">STUDENT</a></div>
-            <div class="box4"><a href="{% url 'vguard_page' %}">GUARDIAN</a></div>
+    <div class="sidebar">
+        <div class="logo_content">
+            <div class="logo">
+                <i class='bx bx-trending-up'></i>
+                <div class="logo_name">SMARTTRACK</div>
+                <i class='bx bx-menu' id="btn"></i>
+            </div>
+        </div>
+        {% block body %}
+        {% endblock %}
+        <ul class="nav-list">
+            <li>
+                <i class='bx bx-search'></i>
+                <input type="search" placeholder="search..">
+                <span class="tooltip">Search</span>
+            </li>
+            <li>
+                 <a href="{% url 'vguard_page' %}">
+                    
+                    <i class='bx bx-body icon'></i>
+                    <span class="links_name">Guardian</span>
+                </a>
+                <span class="tooltip">Guardian</span>
+            </li>
+            <li>
             
-            
-    </section>
-    
-    
+                <a href="{% url 'vteacher_page' %}">
+                    <i class='bx bx-chalkboard icon'></i>
+                    <span class="links_name">Teacher</span>
+                </a>
+                <span class="tooltip">Teacher</span>
+            </li>
+            <li>
+                <a href="{% url 'vstudent_page' %}">
+                    <i class='bx bx-face icon'></i>
+                    <span class="links_name">Student</span>
+                </a>
+                <span class="tooltip">Student</span>
+            </li>
+            <li>
+                <a href="{% url 'vbusco_page' %}">
+                    <i class='bx bx-bus icon'></i>
+                    <span class="links_name">Bus Coordinators</span>
+                </a>
+                <span class="tooltip">Bus Coordinator</span>
+            </li>
+            <li>
+                <a href="{% url 'vbusco_page' %}">
+
+                    <i class="fa-solid fa-map-location-dot icon"></i>
+                    <span class="links_name">Bus Staff </span>
+                </a>
+                <span class="tooltip">Bus Staff</span>
+            </li>
+            <li>
+                <a href="{% url 'vbusdetail_page' %}">
+
+                    <i class="fa-solid fa-map-location-dot icon"></i>
+                    <span class="links_name"> Bus Details</span>
+                </a>
+                <span class="tooltip"> Bus Details</span>
+            </li>
+            <li>
+                 #<a href="{% url 'vroute_page' %}">
+                    <i class="fa-solid fa-map-location-dot icon"></i>
+                    <span class="links_name">Route Points</span>
+                </a>
+                <span class="tooltip">Route Points</span>
+            </li>
+            <li>
+                <a href="#" onclick="loadContent('.html')">
+                    <i class='bx bx-money icon'></i>
+                    <span class="links_name">Transportation Fee</span>
+                </a>
+                <span class="tooltip">Transportation Fee</span>
+            </li>
+            <li>
+                <a href="#" onclick="loadContent('.html')">
+                    <i class='bx bx-current-location icon'></i>
+                    <span class="links_name">Live Location</span>
+                </a>
+                <span class="tooltip">Live Location</span>
+            </li>
+            <li>
+                <a href="#" onclick="loadContent('.html')">
+                    <i class='bx bx-log-out'></i>
+                    <span class="links_name">Logout</span>
+                </a>
+                <span class="tooltip">Logout</span>
+            </li>
+            <!-- Add other menu items similarly -->
+        </ul>
+    </div>
+    <div class="home_content">
+        <div class="text" id="content">Select an option from the sidebar to display content here.</div>
+    </div>
+
+    <script>
+        let btn = document.querySelector("#btn");
+        let sidebar = document.querySelector(".sidebar");
+
+        btn.onclick = function() {
+            sidebar.classList.toggle("active");
+        }
+
+        // Function to load content dynamically
+        function loadContent(page) {
+            const contentDiv = document.getElementById('content');
+            fetch(page)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Could not load ${page}: ${response.statusText}`);
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    contentDiv.innerHTML = data;
+                })
+                .catch(error => {
+                    console.error(error);
+                    contentDiv.innerHTML = `<p style="color: red;">Failed to load content. Ensure the file "${page}" exists and you are running this on a server.</p>`;
+                });
+        }
+    </script>
 </body>
 </html>

@@ -1,46 +1,69 @@
-{% load static %}<!DOCTYPE html>
+{% load static %}
+{% block body %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Routes</title>   
-     <link rel="stylesheet" href="{% static 'student.css' %}">
+     <!-- <link rel="stylesheet" href="{% static 'student.css' %}"> -->
     
     
 </head>
+
+
 <body>
     <div class="container">
         <h2>Add and Manage Student</h2>
         <table class="route-table">
-            <form method="post">
-                {% csrf_token %}
+            
 
           
                 <tr>
                     <th>Sl.No</th>
                     <th>Adm.No</th>
                     <th>Name</th>
-                    <th>Dept</th>
+                    <th>Department</th>
+                    <th>Semester</th>
                     <th>E-mail</th>
+                    <th>Date of birth</th>
+                    <th>address</th>
+                    <th>Place</th>
+                    <th>phone no</th>
+                    <th>guardian</th>
+                    <th>phone no</th>
+                    <th>present_stay</th>
+                    <th>transportation</th>
                     <th>Actions</th>
                 </tr>
-            
+                {% for i in value %}
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.admissionno}}</td>
+                    <td>{{i.Name}}</td>
+                    <td>{{i.department}}</td>
+                    <td>{{i.sem}}</td>
+                    <td>{{i.email}}</td>
+                    <td>{{i.dob}}</td>
+                    <td>{{i.address}}</td>
+                    <td>{{i.place}}</td>
+                    <td>{{i.phoneno}}</td>
+                    <td>{{i.presentstay}}</td>
+                    <td>{{i.transpotation}}</td>
+
+                    
                     <td>
-                        <button class="edit-btn">Edit</button>
-                        <button class="delete-btn">Delete</button>
+                        <button class="action-btn edit-btn"><a href="/administrator/editstudent/{{i.id}}/">Edit</a></button>
+                        
+                        <button class="action-btn delete-btn">Delete</button>
                     </td>
                 </tr>
+            {% endfor %}
                 
            
         </table>
         <button class="add-btn"> <a href="{% url 'addstudent_page' %}">Add</a></button>
     </div>
-</form>
+
 </body>
 </html>
+{% endblock %}

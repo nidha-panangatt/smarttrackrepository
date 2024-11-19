@@ -5,24 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bus Coordinators Form</title>
-    <link rel="stylesheet" href="{% static 'buscoordinators1.css' %}">
+    <link rel="stylesheet" href="{% static 'staff1.css' %}">
 
-</head>
+    
+</head >
 <body>
 
     <div class="form-container">
-        <h2>Add Buscoordinators</h2>
-        <form action=" " method="post">
+        <h2>Edit staff</h2>
+        <form action="" method="post">
             {%csrf_token %}
-            
+
             <label for="name">Name:</label>
-            <input type="text" id="name" name="Name" required>
+            <input type="text" id="name" name="name" required>
 
             <label for="id">ID:</label>
-            <input type="text" id="id" name="coordinatorid" required>
+            <input type="text" id="id" name="id" required>
+
+            <label for="route">Route</label>
+            <input type="text" id="route" name="route" required>
 
             <label for="PH.No">PH.No</label>
-            <input type="text" id="PH.No" name="phoneno" required>
+            <input type="text" id="PH.No" name="PH.No" required>
 
             <input type="submit" value="Submit">
         </form>

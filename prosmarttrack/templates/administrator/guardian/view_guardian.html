@@ -1,4 +1,5 @@
 {% load static %}
+{% block body %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,33 +15,32 @@
 
     <div class="table-container">
         <h2>GUARDIAN</h2>
-        <form method="post">
-            {% csrf_token %}
+        
         <table>
            
                 <tr>
                     <th>S. No</th>
-                    <th>ID</th>
                     <th>Name</th>
+                    <th>std.Name</th>
                     <th>Std.ID</th>
                     <th>PH.No</th>
                     <th>Action</th>
                 </tr>
            
-          
+                {% for i in val %}
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.Name}}</td>
+                    <td>{{i.studentname}}</td>
+                    <td>{{i.studentid}}</td>
+                    <td>{{i.phoneno}}</td>
                     
                     <td>
-                        <button class="action-btn edit-btn">Edit</button>
+                        <button class="action-btn edit-btn"><a href="/administrator/editguard/{{i.id}}/">Edit</a></button>
                         <button class="action-btn delete-btn">Delete</button>
                     </td>
                 </tr>
-                
+                {% endfor %}  
                 
         </table>
         <button class="add-btn"> <a href="{% url 'addguardian_page' %}">Add</a></button>
@@ -48,3 +48,4 @@
 
 </body>
 </html>
+{% endblock %}

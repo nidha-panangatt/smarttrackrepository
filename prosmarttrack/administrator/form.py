@@ -2,6 +2,8 @@ from django.forms import ModelForm
 
 from .models import *
 
+
+
 class BuscooForm(ModelForm):
     class Meta:
         model=BuscoordinatorsTable
@@ -15,7 +17,14 @@ class TeacherForm(ModelForm):
 class GuardianForm(ModelForm):
     class Meta:
         model = GuardianTable
-        fields = ['Name', 'guardianid', 'studentid', 'phoneno']
+        fields = ['Name', 'studentname', 'studentid', 'phoneno']
+
+class BusstaffForm(ModelForm):
+    class Meta:
+        model = BusstaffTable
+        fields = ['Name', 'id', 'route', 'phoneno']
+
+
 
 
         
@@ -32,7 +41,7 @@ class StationForm(ModelForm):
 class StudentForm(ModelForm):
     class Meta:
         model = StudentTable
-        fields = ['Name', 'admissionno', 'department', 'email','sem','dob','address','place','presentstay','guardianname','phoneno','transpotation','busno','busroute','vehicleno']
+        fields = ['Name', 'admissionno', 'department', 'email','sem','dob','address','place','ph_no','presentstay','guardianname','phoneno','transpotation','busno','busroute','vehicleno']
         
 class TranspoForm(ModelForm):
     class Meta:
@@ -43,6 +52,11 @@ class AddstudentForm(ModelForm):
     class Meta:
         model = AddstudentTable
         fields = ['STUDENT', 'STATION']
+
+class BusdetailForm(ModelForm):
+    class Meta:
+        model = BusdetailsTable
+        fields = ['route', 'vehicleno','staff']        
 
 
 

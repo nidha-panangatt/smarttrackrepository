@@ -5,74 +5,124 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Route</title>
-    <link rel="stylesheet" href="{% static 'route1.css' %}">
-
+    <link rel="stylesheet" href="{% static'route1.css'%}">
 </head>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f4f7fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.edit-container {
+    background-color: #ffffff;
+    width: 400px;
+    padding: 30px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.form-group .radio-group {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.form-group .radio-group label {
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+.radio-group input[type="radio"] {
+    margin-right: 5px;
+}
+
+.submit-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #1c1c55;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.submit-btn:hover {
+    background-color: #0e0e41;
+}
+
+</style>
 <body>
+
     <div class="edit-container">
         <h2>Add Route</h2>
-        <form>
+        <form method="post">
             {% csrf_token %}
-    
             <div class="form-group">
                 <label for="route">Route:</label>
-                <input type="text" id="route" name="route">
+                <input type="text" id="route" name="route" >
             </div>
-    
+
             <div class="form-group">
                 <label for="busno">Bus No:</label>
-                <input type="text" id="busno" name="busno">
+                <input type="text" id="busno" name="busno" >
             </div>
-    
-            <!-- Container for repeated fields -->
-            <div id="repeatedFieldsContainer">
-                <div class="repeated-fields">
-                    <div class="form-group">
-                        <label for="station">Station:</label>
-                        <input type="text" name="station[]" placeholder="Enter station name">
-                    </div>
-    
-                    <div class="form-group">
-                        <label>Status:</label>
-                        <div class="radio-group">
-                            <label><input type="radio" name="status[0]" value="active" checked> Active</label>
-                            <label><input type="radio" name="status[0]" value="inactive"> Inactive</label>
-                        </div>
-                    </div>
+
+            <div class="form-group">
+                <label for="station">Station:</label>
+                <input type="text" id="station" name="station" >
+            </div>
+
+            <div class="form-group">
+                <label>Status:</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="status" value="active" checked> Active</label>
+                    <label><input type="radio" name="status" value="inactive"> Inactive</label>
                 </div>
             </div>
-    
-            <!-- <button id="addFieldButton">Add Another Station</button> -->
+
             <button type="submit" class="submit-btn">Submit</button>
         </form>
     </div>
-    
-    <script>
-        document.getElementById('addFieldButton').addEventListener('click', function(event) {
-            event.preventDefault();
-    
-            // Get the container holding all repeated fields
-            const container = document.getElementById('repeatedFieldsContainer');
-    
-            // Clone the first repeated-fields div
-            const original = container.querySelector('.repeated-fields');
-            const clone = original.cloneNode(true);
-    
-            // Clear input values in the cloned fields
-            clone.querySelector('input[name="station[]"]').value = '';
-    
-            // Adjust name attributes to ensure unique groupings for radio buttons
-            const statusRadios = clone.querySelectorAll('input[type="radio"]');
-            const newIndex = container.children.length; // Count current repeated fields
-            statusRadios.forEach(radio => {
-                radio.name = status[${newIndex}];
-                radio.checked = false; // Reset radio buttons
-            });
-    
-            // Append the cloned fields to the container
-            container.appendChild(clone);
-        });
-    </script>
-    </body>
+
+</body>
 </html>
-    

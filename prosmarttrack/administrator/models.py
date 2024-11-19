@@ -11,6 +11,7 @@ class StudentTable(models.Model):
     dob=models.CharField(max_length=10,null=True,blank=True)
     address=models.CharField(max_length=50,null=True,blank=True)
     place=models.CharField(max_length=30,null=True,blank=True)
+    ph_no=models.BigIntegerField(null=True,blank=True)
     presentstay=models.CharField(max_length=30,null=True,blank=True)
     guardianname=models.CharField(max_length=20,null=True,blank=True)
     phoneno=models.BigIntegerField(null=True,blank=True)
@@ -45,12 +46,19 @@ class TeacherTable(models.Model):
 
 class GuardianTable(models.Model):
     Name = models.CharField(max_length=30, null=True, blank=True)
-    guardianid=models.CharField(max_length=10,null=True,blank=True)
+    studentname=models.CharField(max_length=10,null=True,blank=True)
     studentid=models.CharField(max_length=10,null=True,blank=True)
     phoneno=models.BigIntegerField(null=True,blank=True)
     created_at=models.DateTimeField(auto_now_add=True, null=True, blank=True)
     updated_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
-    
+
+class BusstaffTable(models.Model):  
+     Name = models.CharField(max_length=30, null=True, blank=True)
+     busid=models.CharField(max_length=10,null=True,blank=True)
+     route=models.CharField(max_length=20,null=True,blank=True)
+     phoneno=models.BigIntegerField(null=True,blank=True)
+     created_at=models.DateTimeField(auto_now_add=True, null=True, blank=True)
+     updated_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
 
 class RouteTable(models.Model):
@@ -60,6 +68,12 @@ class RouteTable(models.Model):
     created_at=models.DateTimeField(auto_now_add=True, null=True, blank=True)
     updated_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     
+class BusdetailsTable(models.Model): 
+    route=models.CharField(max_length=10,null=True,blank=True)
+    vehicleno=models.CharField(max_length=20,null=True,blank=True)
+    staff=models.CharField(max_length=30,null=True,blank=True)
+    created_at=models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     
 
 

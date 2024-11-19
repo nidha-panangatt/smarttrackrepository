@@ -1,4 +1,6 @@
+
 {% load static %}
+{% block body %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,8 +16,7 @@
 
     <div class="table-container">
         <h2>Bus Coordinators</h2>
-        <form method="post">
-            {% csrf_token %}
+        
         <table>
             
                 <tr>
@@ -26,25 +27,26 @@
                     <th>Action</th>
                 </tr>
          
-            
+                {% for i in val %}
                 <tr>
 
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.Name}}</td>
+                    <td>{{i.coordinatorid}}</td>
+                    <td>{{i.phoneno}}</td>
                     
                     <td>
-                        <button class="action-btn edit-btn">Edit</button></a>
-                        <button class="action-btn delete-btn">Delete</button>
+                        <button class="action-btn edit-btn"><a href="/administrator/editbusco/{{i.id}}/">Edit</a></button>
+                        <button class="action-btn delete-btn"><a href="/administrator/Deletebusco/{{i.id}}/">delete</a></button>
                     </td>
                 </tr>
                 
                 
-            
+                {% endfor %}  
         </table>
         <button class="add-btn"> <a href="{% url 'addbusco_page' %}">Add</a></button>
     </div>
 
 </body>
 </html>
+{% endblock %}
