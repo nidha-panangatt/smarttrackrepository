@@ -62,14 +62,50 @@ class Teachers(View):
     
 class AddStudent(View):
      def get(self,request):
-        return render(request,"administrator/student/add_student.html")  
+        r=RouteTable.objects.all()
+        return render(request,"administrator/student/add_student.html",{'val':r})  
      def post(self,request):
-        form=StudentForm(request.POST)
-        if form.is_valid():
-            form.save()
+            name=request.POST['Name']
+            admission_no=request.POST['admissionno']
+            department=request.POST['department']
+            sem=request.POST['sem']
+            email=request.POST['email']
+            dob=request.POST['dob']
+            address=request.POST['address']
+            place=request.POST['place']
+            ph_no=request.POST['ph_no']
+            guardianname=request.POST['guardianname']
+            phoneno=request.POST['phoneno']
+            commuter_type=request.POST['commuter_type']
+            transportation_type=request.POST['transportation_type']
+            route=request.POST['route']
+            vehicle_number=request.POST['vehicle_number']
+            vehicle_type=request.POST['vehicle_type']
+
+
+
+            obj = StudentTable()
+            obj.Name = name
+            obj.admissionno = admission_no
+            obj.department = department
+            obj.sem = sem
+            obj.email = email
+            obj.dob = dob
+            obj.address = address
+            obj.place = place
+            obj.ph_no = ph_no
+            obj.guardianname = guardianname
+            obj.phoneno = phoneno
+            obj.commuter_type = commuter_type
+            obj.transportation_type = transportation_type
+            obj.route = route
+            obj.vehicle_number = vehicle_number
+            obj.vehicle_type = vehicle_type
+            obj.save()
+        
             return HttpResponse('''<script>alert("successfully added"); window.location="/administrator/Viewstudent/"</script>''')  
-        else:
-            return HttpResponse('''<script>alert("invalid"); window.location="/administrator/Viewstudent"</script>''')  
+        # else:
+        #     return HttpResponse('''<script>alert("invalid"); window.location="/administrator/Viewstudent"</script>''')  
 
 class AddTeacher(View):
      def get(self,request):
@@ -154,9 +190,12 @@ class AddRoute(View):
 
 class AddStation(View):
      def get(self,request):
-        return render(request,"administrator/station/add_station.html")     
+        obj=RouteTable.objects.all()
+        return render(request,"administrator/station/add_station.html",{'val':obj})     
      def post(self,request):
+        print("dfghjkl")
         form=StationForm(request.POST)
+        print(form)
         if form.is_valid():
             form.save()
             return HttpResponse('''<script>alert("successfully added"); window.location="/administrator/Viewstation/"</script>''')  
@@ -200,6 +239,7 @@ class ViewGuardian(View):
 class ViewBusstaff(View):
     def get(self, request):
         staff_obj =BusstaffTable.objects.all()
+        print(staff_obj)
         return render(request, "administrator/busstaff/view_staff.html", {'val': staff_obj})        
 
 class ViewCharges(View):
@@ -310,7 +350,31 @@ class EditBusdetails(View):
                 form.save()
                 return HttpResponse('''<script>alert("successfully edited"); window.location="/administrator/Viewbusdetails/"</script>''')    
                                
+class EditRoute(View):
+    def get(self, request,id):
+        a = RouteTable.objects.get(id=id)
+        print(a)
+        return render(request, "administrator/route/edit_route.html", {'val': a}) 
+    def post(self, request, id):
+            obj = RouteTable.objects.get(id=id)
+            form = RouteForm(request.POST, instance=obj)
+            if form.is_valid():
+                form.save()
+                return HttpResponse('''<script>alert("successfully edited"); window.location="/administrator/Viewroute/"</script>''')    
 
+class EditStation(View):
+    def get(self, request,id):
+        a = StationTable.objects.get(id=id)
+        b = RouteTable.objects.all()
+        print(a)
+        return render(request, "administrator/station/edit_station.html", {'val': a,'b':b}) 
+    def post(self, request, id):
+            obj = StationTable.objects.get(id=id)
+            form = StationForm(request.POST, instance=obj)
+            if form.is_valid():
+                form.save()
+                return HttpResponse('''<script>alert("successfully edited"); window.location="/administrator/Viewstation/"</script>''')    
+                                                             
 
 class DeleteTeacher(View):
     def get(self,request,id):
@@ -342,12 +406,36 @@ class DeleteBusstaff(View):
         b.delete()
         return redirect('vstaff_page')        
 
-
-
+class DeleteBusdetails(View):
+    def get(self,request,id):
+        b=BusdetailsTable.objects.get(id=id)
+        b.delete()
+        return redirect('vbusdetail_page')  
+    
+class DeleteRoute(View):
+    def get(self,request,id):
+        b=BusdetailsTable.objects.get(id=id)
+        b.delete()
+        return redirect('vroute_page')      
+    
+class DeleteStation(View):
+    def get(self,request,id):
+        b=StationTable.objects.get(id=id)
+        b.delete()
+        return redirect('vstation_page')      
+        
 class AdminDashboard(View):
      def get(self,request):
         return render(request,"administrator/admindashboard.html")       
 
+class ViewStudentdetails(View):
+    def get(self, request,id):
+
+        obj =GuardianTable.objects.get(id=id)
+        admission = obj.admissionno 
+        student_obj = StudentTable.objects.get(admissionno=admission)
+        print("%%%%%%%%%%%%", admission)
+        return render(request, "administrator/guardian/student_det.html", {'val': student_obj})
 
 
     

@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Bus Coordinators</title>
+    <title>bus detail</title>
     <link rel="stylesheet" href="{% static 'det.css' %}">
 
    
@@ -32,7 +32,7 @@
                     <td>{{i.staff}}</td>
                     
                     <td><button class="action-btn edit-btn"><a href="/administrator/editbusdetails/{{i.id}}/">Edit</a></button>
-                        <button class="action-btn delete-btn">Delete</button>
+                        <button class="action-btn delete-btn"><a href="/administrator/deletebusdetails/{{i.id}}/">Delete</a></button>
                        
                     </td>
                 </tr>

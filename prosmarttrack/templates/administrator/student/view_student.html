@@ -31,11 +31,11 @@
                     <th>phone no</th>
                     <th>guardian</th>
                     <th>phone no</th>
-                    <th>present_stay</th>
+                    <th>commuter_type</th>
                     <th>transportation</th>
                     <th>Actions</th>
                 </tr>
-                {% for i in value %}
+                {% for i in val %}
                 <tr>
                     <td>{{forloop.counter}}</td>
                     <td>{{i.admissionno}}</td>
@@ -46,9 +46,11 @@
                     <td>{{i.dob}}</td>
                     <td>{{i.address}}</td>
                     <td>{{i.place}}</td>
+                    <td>{{i.ph_no}}</td>
+                    <td>{{i.guardianname}}</td>
                     <td>{{i.phoneno}}</td>
-                    <td>{{i.presentstay}}</td>
-                    <td>{{i.transpotation}}</td>
+                    <td>{{i.commuter_type}}</td>
+                    <td>{{i.transportation_type}}</td>
 
                     
                     <td>

@@ -1,10 +1,13 @@
-<!DOCTYPE html>
+{% load static %}
+{% block body %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add and Manage Stations</title>
-    <link rel="stylesheet" href="station.css">
+    <link rel="stylesheet" href="{% static 'station.css' %}">
+    
    
 </head>
 <body>
@@ -12,32 +15,35 @@
     <div class="container">
         <h2>Add and Manage Stations</h2>
         <table>
-            <thead>
+           
                 <tr>
                     <th>Sl. No</th>
-                    <th>Route</th>
+                    <th>route</th>
                     <th>Station</th>
-                    <th>Status</th>
+                    <th>charges</th>
                     <th>Action</th>
                 </tr>
-            </thead>
-            <tbody>
-                <!-- Example Row -->
+            
+           
+                {% for i in val %}
                 <tr>
-                    <td>1</td>
-                    <td>Route 1</td>
-                    <td>Station A</td>
-                    <td>Active</td>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.route.route}}</td>
+                     <td>{{i.station}}</td>
+                    <td>{{i.charges}}</td>
                     <td>
-                        <img src="https://img.icons8.com/ios-glyphs/30/trash.png" alt="Trash Icon" title="Delete">
+                        <button class="action-btn edit-btn"><a href="/administrator/editstation/{{i.id}}/">Edit</a></button>
+                        <button class="action-btn delete-btn"><a href="/administrator/Deletestation/{{i.id}}/">delete</a></button>
                     </td>
                 </tr>
-                <!-- Add more rows as needed -->
-            </tbody>
+                
+                
+                {% endfor %}  
         </table>
-        <button class="add-btn">Add Station</button>
+        <button class="add-btn"> <a href="{% url 'addstation_page' %}">Add</a></button>
     </div>
 
 </body>
 </html>
+{% endblock %}
 

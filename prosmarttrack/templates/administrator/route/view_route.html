@@ -1,44 +1,44 @@
-{% load static %}
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Routes</title>
-   <link rel="stylesheet" href="{% static 'route.css' %}">
+   <link rel="stylesheet" href="">
     </style>
 </head>
 <body>
     <div class="container">
         <h2>Add and Manage Routes</h2>
         <table class="route-table">
-            <thead>
+            
                 <tr>
                     <th>SI.No</th>
                     <th>Route</th>
-                    <th>Bus No</th>
-                    <th>Station</th>
+                    <th>Trip No</th>
                     <th>Status</th>
                     <th>Actions</th>
                 </tr>
-            </thead>
-            <tbody>
+                {% for i in val %}
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.route}}</td>
+                    <td>{{i.tripno}}</td>
                     <td></td>
                     <td><span class="status active">Active</span></td>
                     <td>
-                        <a href="delete_route.html"><button class="edit-btn">Edit</button></a>
-                        <a href="delete_route.html"><button class="delete-btn">Delete</button></a>
+                        <button class="action-btn edit-btn"><a href="/administrator/editteacher/{{i.id}}/">Edit</a></button>
+                        <button class="action-btn delete-btn"><a href="/administrator/Deleteteacher/{{i.id}}/">delete</a></button>
                     </td>
                 </tr>
                
-                
-            </tbody>
+                {% endfor %}
+            
         </table>
-        <button class="add-btn">Add Route</button>
+        <button class="add-btn"><a href="{% url 'addroute_page' %}">Add</a></button>
     </div>
 </body>
 </html>

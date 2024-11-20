@@ -17,16 +17,16 @@
             {%csrf_token %}
 
             <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
+            <input type="text" id="name" name="name"  value="{{val.name}}"required>
 
             <label for="id">ID:</label>
-            <input type="text" id="id" name="id" required>
+            <input type="text" id="id" name="id" value="{{val.staffid}}"required>
 
             <label for="route">Route</label>
-            <input type="text" id="route" name="route" required>
+            <input type="text" id="route" name="route" value="{{val.route}}" required>
 
             <label for="PH.No">PH.No</label>
-            <input type="text" id="PH.No" name="PH.No" required>
+            <input type="text" id="PH.No" name="PH.No" value="{{val.phoneno}}"required>
 
             <input type="submit" value="Submit">
         </form>

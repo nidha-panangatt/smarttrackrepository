@@ -1,14 +1,11 @@
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Station</title>  
-    <link rel="stylesheet" href="{% static 'station2.css' %}">
-
-
+    <title>Add Station</title>
+    <link rel="stylesheet" href="station2.css">
 </head>
 <body>
 
@@ -19,18 +16,17 @@
             <label for="route">ROUTE:</label>
             <select name="route" id="route" placeholder="route">
                 <option value="" disabled selected>select the route</option>
-                {% for i in val %}
-                <option value="{{i.id}}">{{i.route}}</option>
+                {% for i in b %}
+                <option value="{{i.id}}" {% if i.id == val.route.id %} selected {% endif %}>{{i.route}}</option>
                 {% endfor %}
             </select>
-        </div>
         <div class="form-group">
             <label for="station">STATION:</label>
-            <input type="text" id="station" name="station" placeholder="Enter station name" >
+            <input type="text" id="station" name="station" value="{{val.station}}" required>
         </div>
 	<div class="form-group">
             <label for="monthly charges">CHARGES:</label>
-            <input type="text" id="charges" name="charges" placeholder="Enter the montly charge">
+            <input type="text" id="charges" name="charges" value="{{val.charges}}" required>
         </div>
 
         <input type="submit" value="Submit">

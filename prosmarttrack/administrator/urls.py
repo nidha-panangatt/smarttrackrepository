@@ -16,7 +16,7 @@ urlpatterns = [
     path('addstudent/',Students.as_view(),name="addstudent_page"),
     path('station/',Station.as_view(),name="station_page"),
     path('route',Route.as_view(),name="route_page"),
-    path('charges',Charges.as_view(),name="charges_page"),
+    #path('charges',Charges.as_view(),name="charges_page"),
     path('transportation',Transportation.as_view(),name="transportation_page"),
     path('busdetails',Busdetails.as_view(),name="busdetail_page"),
 
@@ -36,13 +36,14 @@ urlpatterns = [
     path('Viewbusco/',ViewBusco.as_view(),name="vbusco_page"),
     path('Viewguard/',ViewGuardian.as_view(),name="vguard_page"),
     path('Viewbusstaff/',ViewBusstaff.as_view(),name="vstaff_page"),
-    path('Viewcharges/',ViewCharges.as_view(),name="vcharges_page"),
+    #path('Viewcharges/',ViewCharges.as_view(),name="vcharges_page"),
     path('Viewroute/',ViewRoute.as_view(),name="vroute_page"),
     path('Viewstation/',ViewStation.as_view(),name="vstation_page"),
     path('Viewstudent/',ViewStudent.as_view(),name="vstudent_page"),
     path('Viewtranspo/',ViewTranspo.as_view(),name="vtranspo_page"),
     path('Viewaddstudent/',ViewStudent.as_view(),name="vaddstudent_page"),
     path('Viewbusdetails',ViewBusdetails.as_view(),name="vbusdetail_page"),
+    path('Viewstudentdetails/<int:id>/',ViewStudentdetails.as_view(),name="vgsdetail_page"),
 
     
     path('editteacher/<int:id>/',EditTeacher.as_view(), name="eteacher_page"),
@@ -51,6 +52,9 @@ urlpatterns = [
     path('editbusstaff/<int:id>/',EditBusstaff.as_view(),name="estaff_page"),
     path('editstudent/<int:id>/',EditStudent.as_view(),name="estudent_page"),
     path('editbusdetails/<int:id>/',EditBusdetails.as_view(),name="ebusdetails_page"),
+    path('editbusroute/<int:id>/',EditRoute.as_view(),name="eroute_page"),
+    path('editstation/<int:id>/',EditStation.as_view(),name="estation_page"),
+    
     
     
     
@@ -60,6 +64,10 @@ urlpatterns = [
     path('Deleteguardian/<int:id>/',DeleteGuardian.as_view(),name='Dguardian_page'),
     path('Deletebusstaff/<int:id>/',DeleteBusstaff.as_view(),name='Dstaff_page'),
     path('Deletestudent/<int:id>/',DeleteStudent.as_view(),name='Dstudent_page'),
+    path('Deletebusdetails/<int:id>/',DeleteBusdetails.as_view(),name='Ddetail_page'),
+    path('Deletebusroute/<int:id>/',DeleteRoute.as_view(),name="Droute_page"),
+    path('Deletestation/<int:id>/',DeleteStation.as_view(),name="Dstation_page"),
+    
     
 
 

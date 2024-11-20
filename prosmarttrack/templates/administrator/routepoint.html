@@ -1,0 +1,130 @@
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Tracking System</title>
+    <link rel="stylesheet" href="{% static 'routepoint.css' %}">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+<div class="tab">
+    <button class="tablinks" onclick="openTab('stations')">Stations</button>
+    <button class="tablinks" onclick="openTab('routes')">Routes</button>
+    
+</div>
+
+<!-- Stations Section -->
+<div id="stations" class="tabcontent">
+    <br>
+    <select id="stationFilter" onchange="filterTable('stationTable', 'stationFilter')">
+        <option value="">--Select route--</option>
+        <option value="manjeri">Manjeri</option>
+        <option value="mlp">Malappuram</option>
+        <option value="kdy">Kondotty</option>
+    </select>
+
+    <!-- Load the content from view_station.html in an iframe -->
+    <iframe src="/administrator/editbusco/{{i.id}}/"style="width: 100%; height: 1000px; border: none;"></iframe>
+</div>
+
+<!-- Routes Section -->
+<div id="routes" class="tabcontent">
+    <h3>Select a Route to View Bus Details</h3>
+    <select id="routeDropdown" onchange="filterTable('routeTable', 'routeDropdown')">
+        <option value="">--Select a route--</option>
+        <option value="manjeri">Manjeri</option>
+        <option value="mlp">Malappuram</option>
+        <option value="kdy">Kondotty</option>
+    </select>
+<!-- Load the content from view_station.html in an iframe -->
+    <iframe src="view_route.html" style="width: 100%; height: 1000px; border: none;"></iframe>
+</div>
+
+
+
+
+
+</div>
+<script>function openTab(openTab, element) {
+    // Hide all tab contents
+    document.querySelectorAll(".tabcontent").forEach(tab => tab.style.display = "none");
+    // Remove 'active' class from all tabs
+    document.querySelectorAll(".tablinks").forEach(tab => tab.classList.remove("active"));
+    // Show the selected tab content
+    document.getElementById(openTab).style.display = "block";
+    // Add 'active' class to the clicked tab
+    element.classList.add("active");
+}
+
+function filterStudents() {
+    const selectedRoute = document.getElementById("stationFilter").value;
+    const studentList = document.getElementById("studentList");
+    studentList.innerHTML = ""; // Clear previous content
+
+    if (selectedRoute) {
+        let tableHTML = `<h4>Students in ${selectedRoute.charAt(0).toUpperCase() + selectedRoute.slice(1)} Route</h4>`;
+       
+      
+           }
+}
+
+function toggleDetails(id) {
+    const details = document.getElementById(id);
+    details.style.display = details.style.display === "none" ? "block" : "none";
+}
+
+
+
+function showRouteInfo() {
+    const selectedRoute = document.getElementById("routeDropdown").value;
+    const routeInfo = document.getElementById("routeInfo");
+    routeInfo.innerHTML = ""; // Clear previous content
+
+    if (selectedRoute) {
+        routeInfo.innerHTML = `<h4>Information about ${selectedRoute.replace("-", " to ").toUpperCase()}</h4>
+            <p>Details about the selected route will be displayed here.</p>`;
+    }
+}
+
+
+// Initially open the first tab
+openTab('stations', document.querySelector(".tablinks"));
+
+
+    // Open tab function
+    function openTab(tabName) {
+        let tabcontent = document.getElementsByClassName("tabcontent");
+        for (let i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        document.getElementById(tabName).style.display = "block";
+    }
+
+    // Filter function to filter table rows based on selected route
+    function filterTable(tableId, dropdownId) {
+        let table = document.getElementById(tableId);
+        let rows = table.getElementsByTagName("tr");
+        let filterValue = document.getElementById(dropdownId).value.toLowerCase();
+
+        for (let i = 1; i < rows.length; i++) {
+            let row = rows[i];
+            let route = row.getAttribute("data-route");
+            if (filterValue === "" || route === filterValue) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        }
+    }
+
+         // Initialize the first tab as open
+    openTab('stations');
+
+
+</script>
+</body>
+</html>

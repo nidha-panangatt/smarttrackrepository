@@ -20,13 +20,13 @@
 </head>
 <body>
     <div class="form-container">
-        <h2>Add New Student</h2>
+        <h2>Student</h2>
         <form action="#" method="post">
             {% csrf_token %}
             <!-- General Details -->
             <div class="form-group">
                 <label for="name">Name:</label>
-                <input type="text" id="name" name="Name" required>
+                <input type="text" id="name" name="Name" value="{{ val.Name }}" required>
             </div>
             <div class="form-group">
                 <label for="admission_no">Admission No:</label>
@@ -64,42 +64,25 @@
                 <label for="guardian">Guardian:</label>
                 <input type="text" id="guardian" name="guardianname" required>
             </div>
+           {% load static %}
+
             <div class="form-group">
                 <label for="guardian-phone">Guardian's Phone No:</label>
                 <input type="text" id="guardian-phone" name="phoneno" required>
             </div>
-
-            <!-- Commuter Details -->
+        
             <div class="form-group">
-                <label for="commuter-type">Commuter Type:</label>
-                <select id="commuter-type" name="commuter_type">
-                    <option value="hostelers">Hostelers</option>
-                    <option value="daily-commuters">Daily Commuters</option>
-                </select>
+                <label for="guardian-phone">Commuter Type:</label>
+                <input type="text" id="guardian-phone" name="commuter_type" required>
             </div>
-
-            <!-- Transportation Type -->
-            <div id="transportation-type" class="form-group">
-                <label for="transportation-type">Transportation Type:</label>
-                <select id="transportation-select" name="transportation_type">
-                    <option value="by college bus">By College Bus</option>
-                    <option value="by own vehicle">By Own Vehicle</option>
-                    <option value="by public /walk">By Public/Walk</option>
-                </select>
+            <div class="form-group">
+                <label for="guardian-phone">Transportation Type:</label>
+                <input type="text" id="guardian-phone" name="transportation_type" required>
             </div>
+            
+ 
 
-            <!-- Route for College Bus -->
-            <div id="route-group" class="form-group">
-                <label for="route">Route:</label>
-                <select id="route" name="route">
-                    <option value="" disabled selected>select the route</option>
-                {% for i in val %}
-                <option value="{{i.id}}">{{i.route}}</option>
-                {% endfor %}
-                </select>
-            </div>
-
-            <!-- Vehicle Details -->
+        
             <div id="vehicle-group">
                 <div class="form-group">
                     <label for="vehicle-number">Vehicle Number:</label>
@@ -111,42 +94,11 @@
                 </div>
             </div>
 
-            <!-- Script for Dynamic Field Display -->
-            <script>
-                const commuterTypeSelect = document.getElementById('commuter-type');
-                const transportationType = document.getElementById('transportation-type');
-                const transportationSelect = document.getElementById('transportation-select');
-                const routeGroup = document.getElementById('route-group');
-                const vehicleGroup = document.getElementById('vehicle-group');
-
-                // Show Transportation Type when "Daily Commuters" is selected
-                commuterTypeSelect.addEventListener('change', () => {
-                    if (commuterTypeSelect.value === 'daily-commuters') {
-                        transportationType.style.display = 'block';
-                    } else {
-                        transportationType.style.display = 'none';
-                        routeGroup.style.display = 'none';
-                        vehicleGroup.style.display = 'none';
-                    }
-                });
-
-                // Show Route dropdown for "By College Bus" and vehicle details for "By Own Vehicle"
-                transportationSelect.addEventListener('change', () => {
-                    if (transportationSelect.value === 'by college bus') {
-                        routeGroup.style.display = 'block';
-                        vehicleGroup.style.display = 'none';
-                    } else if (transportationSelect.value === 'by own vehicle') {
-                        routeGroup.style.display = 'none';
-                        vehicleGroup.style.display = 'block';
-                    } else {
-                        routeGroup.style.display = 'none';
-                        vehicleGroup.style.display = 'none';
-                    }
-                });
-            </script>
-
             <button type="submit" class="submit-btn">Submit</button>
         </form>
     </div>
 </body>
 </html>
+
+
+           

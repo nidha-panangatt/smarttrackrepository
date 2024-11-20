@@ -17,31 +17,29 @@ class TeacherForm(ModelForm):
 class GuardianForm(ModelForm):
     class Meta:
         model = GuardianTable
-        fields = ['Name', 'studentname', 'studentid', 'phoneno']
+        fields = ['Name',  'admissionno', 'phoneno']
 
 class BusstaffForm(ModelForm):
     class Meta:
         model = BusstaffTable
-        fields = ['Name', 'id', 'route', 'phoneno']
-
-
-
-
+        fields = ['Name', 'staffid', 'route', 'phoneno']
         
 class RouteForm(ModelForm):
     class Meta:
         model = RouteTable
-        fields = ['route', 'status','monthlycharges']
+        fields = ['route','tripno', 'status']
         
 class StationForm(ModelForm):
     class Meta:
         model = StationTable
-        fields = ['route', 'station', 'status']
+        fields = ['route', 'station', 'charges']
 
 class StudentForm(ModelForm):
     class Meta:
         model = StudentTable
-        fields = ['Name', 'admissionno', 'department', 'email','sem','dob','address','place','ph_no','presentstay','guardianname','phoneno','transpotation','busno','busroute','vehicleno']
+        fields = ['Name', 'admissionno', 'department', 'email','sem','dob','address','place','ph_no',
+                  'guardianname','phoneno','transportation_type','commuter_type','route','vehicle_number',
+                  'vehicle_type']
         
 class TranspoForm(ModelForm):
     class Meta:

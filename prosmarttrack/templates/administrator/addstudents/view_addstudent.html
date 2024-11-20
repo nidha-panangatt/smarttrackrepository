@@ -25,20 +25,24 @@
                     <th>Action</th>
                 </tr>
            
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    
-                    
-                    <td>
-                        <button class="action-btn edit-btn">Edit</button>
-                        <button class="action-btn delete-btn">Delete</button>
-                    </td>
-                </tr>
+            </tr>
+            {%for i in value %}
+                 <tr>
+                     <td>{{forloop.counter}}</td>
+                     <td>{{i.admissionno}}</td>
+                     <td>{{i.Name}}</td>
+                     <td>{{i.department}}</td>
+                     <td>{{i.route}}</td>
+                     <td>{{i.station}}</td>
+                     
+                     
+                     <td>
+                        <button class="action-btn edit-btn"><a href="/administrator/editaddstudent/{{i.id}}/">Edit</a></button>
+                        <button class="action-btn delete-btn"><a href="/administrator/Deleteteacher/{{i.id}}/">delete</a></button>
+                     </td>
+                 </tr>
+                 {% endfor %}
+ 
                 
                 
            
