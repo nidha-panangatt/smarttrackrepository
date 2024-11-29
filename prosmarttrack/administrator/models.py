@@ -3,6 +3,7 @@ from django.db import models
 # Create your models here.
 
 class StudentTable(models.Model):
+    student_image=models.FileField(upload_to='student_image',null=True,blank=True)
     Name = models.CharField(max_length=30, null=True, blank=True)
     admissionno=models.CharField(max_length=10,null=True,blank=True)
     department=models.CharField(max_length=10,null=True,blank=True)
@@ -17,8 +18,7 @@ class StudentTable(models.Model):
     commuter_type=models.CharField(max_length=20,null=True,blank=True)
     transportation_type=models.CharField(max_length=20,null=True,blank=True)
     route=models.CharField(max_length=20,null=True,blank=True)
-    vehicle_number=models.CharField(max_length=20,null=True,blank=True)
-    vehicle_type=models.CharField(max_length=20,null=True,blank=True)
+   
     created_at=models.DateTimeField(auto_now_add=True, null=True, blank=True)
     updated_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     

@@ -69,10 +69,16 @@ urlpatterns = [
     path('Deletestation/<int:id>/',DeleteStation.as_view(),name="Dstation_page"),
     
     
-
-
-
+  
+    path('transportationss', viewsTransportation.as_view(), name='transportationss'),
+    
+    path('routepoints', viewsRoutepoint.as_view(), name='routepoint'),
+    path('departmentstudents/<str:department>/',viewsDepartementstudents.as_view(),name='departmentstudentss')
 ]
+
+
+
+
 
 
 

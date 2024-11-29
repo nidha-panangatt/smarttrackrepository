@@ -1,4 +1,4 @@
-{% load static %}
+
 
 <html lang="en">
 <head>
@@ -13,17 +13,69 @@
         #route-group {
             display: none; /* Route dropdown hidden initially */
         }
-        #vehicle-group {
-            display: none; /* Vehicle-related fields hidden initially */
-        }
+        
+
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+.form-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 300px;
+}
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #333;
+}
+.form-container label {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 5px;
+    display: block;
+}
+.form-container input[type="text"] {
+    width: 100%;
+    padding: 5px;
+  margin-bottom:-5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+.form-container input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #1c1c55;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.form-container input[type="submit"]:hover {
+    background-color: #0e0e41;
+}
+   
     </style>
 </head>
 <body>
     <div class="form-container">
         <h2>Add New Student</h2>
-        <form action="#" method="post">
-            {% csrf_token %}
+            
             <!-- General Details -->
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <label for="photo">Student:</label>
+                <input type="file" id="photo" name="student_image">
             <div class="form-group">
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="Name" required>
@@ -46,7 +98,7 @@
             </div>
             <div class="form-group">
                 <label for="dob">Date of Birth:</label>
-                <input type="text" id="text" name="dob" required>
+                <input type="date" id="text" name="dob" required>
             </div>
             <div class="form-group">
                 <label for="address">Address:</label>
@@ -100,16 +152,7 @@
             </div>
 
             <!-- Vehicle Details -->
-            <div id="vehicle-group">
-                <div class="form-group">
-                    <label for="vehicle-number">Vehicle Number:</label>
-                    <input type="text" id="vehicle-number" name="vehicle_number">
-                </div>
-                <div class="form-group">
-                    <label for="vehicle-type">Vehicle Type:</label>
-                    <input type="text" id="vehicle-type" name="vehicle_type">
-                </div>
-            </div>
+            
 
             <!-- Script for Dynamic Field Display -->
             <script>
@@ -117,8 +160,7 @@
                 const transportationType = document.getElementById('transportation-type');
                 const transportationSelect = document.getElementById('transportation-select');
                 const routeGroup = document.getElementById('route-group');
-                const vehicleGroup = document.getElementById('vehicle-group');
-
+              
                 // Show Transportation Type when "Daily Commuters" is selected
                 commuterTypeSelect.addEventListener('change', () => {
                     if (commuterTypeSelect.value === 'daily-commuters') {
@@ -126,7 +168,7 @@
                     } else {
                         transportationType.style.display = 'none';
                         routeGroup.style.display = 'none';
-                        vehicleGroup.style.display = 'none';
+                       
                     }
                 });
 
@@ -134,19 +176,19 @@
                 transportationSelect.addEventListener('change', () => {
                     if (transportationSelect.value === 'by college bus') {
                         routeGroup.style.display = 'block';
-                        vehicleGroup.style.display = 'none';
+                      
                     } else if (transportationSelect.value === 'by own vehicle') {
                         routeGroup.style.display = 'none';
-                        vehicleGroup.style.display = 'block';
+                       
                     } else {
                         routeGroup.style.display = 'none';
-                        vehicleGroup.style.display = 'none';
+                       
                     }
                 });
             </script>
+            <br>
 
-            <button type="submit" class="submit-btn">Submit</button>
-        </form>
+<input type="submit" value="Submit">
     </div>
 </body>
 </html>

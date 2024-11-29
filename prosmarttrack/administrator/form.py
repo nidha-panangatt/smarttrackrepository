@@ -38,8 +38,8 @@ class StudentForm(ModelForm):
     class Meta:
         model = StudentTable
         fields = ['Name', 'admissionno', 'department', 'email','sem','dob','address','place','ph_no',
-                  'guardianname','phoneno','transportation_type','commuter_type','route','vehicle_number',
-                  'vehicle_type']
+                  'guardianname','phoneno','transportation_type','commuter_type','route'
+                ]
         
 class TranspoForm(ModelForm):
     class Meta:

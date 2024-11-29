@@ -18,7 +18,8 @@
                 <i class='bx bx-menu' id="btn"></i>
             </div>
         </div>
-       
+        {% block body %}
+        {% endblock %}
         <ul class="nav-list">
             <li>
                 <i class='bx bx-search'></i>
@@ -72,7 +73,7 @@
                 <span class="tooltip"> Bus Details</span>
             </li>
             <li>
-
+                
                  #<a href="{% url 'vroute_page' %}">
                     <i class="fa-solid fa-map-location-dot icon"></i>
                     <span class="links_name">Route Points</span>
@@ -80,18 +81,11 @@
                 <span class="tooltip">Route Points</span>
             </li>
             <li>
-                <a href="{% url 'transportationss' %}" onclick="loadContent('transportation.html')">
+                <a href="#" onclick="loadContent('transportation.html')">
                     <i class='bx bx-money icon'></i>
-                    <span class="links_name">Transportation</span>
+                    <span class="links_name">Transportation Fee</span>
                 </a>
-                <span class="tooltip">Transportation</span>
-            </li>
-            <li>
-                <a href="{% url 'routepoint' %}" onclick="loadContent('routepoint.html')">
-                    <i class='bx bx-money icon'></i>
-                    <span class="links_name">routepoint</span>
-                </a>
-                <span class="tooltip">routepoint</span>
+                <span class="tooltip">Transportation Fee</span>
             </li>
             <li>
                 <a href="#" onclick="loadContent('.html')">
@@ -111,9 +105,7 @@
         </ul>
     </div>
     <div class="home_content">
-        <div class="text" id="content"> here.</div>
-        {% block body %}
-        {% endblock %}
+        <div class="text" id="content">Select an option from the sidebar to display content here.</div>
     </div>
 
     <script>
