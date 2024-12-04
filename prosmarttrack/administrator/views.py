@@ -1,7 +1,7 @@
 
 from django.shortcuts import render,redirect
 from django.views import View
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 
 from .models import *
 from .form import *
@@ -179,7 +179,7 @@ class EditRoute(View):
 
 class DeleteRoute(View):
     def get(self,request,id):
-        b=BusdetailsTable.objects.get(id=id)
+        b=RouteTable.objects.get(id=id)
         b.delete()
         return redirect('vroute_page')                                 
 
@@ -390,12 +390,12 @@ class AddStation(View):
         obj=RouteTable.objects.all()
         return render(request,"administrator/station/add_station.html",{'val':obj})     
      def post(self,request):
-        print("dfghjkl")
+       
         form=StationForm(request.POST)
         print(form)
         if form.is_valid():
             form.save()
-            return HttpResponse('''<script>alert("successfully added"); window.location="/administrator/Viewstation/"</script>''')  
+            return HttpResponse('''<script>alert("successfully added"); window.location="/administrator/routepoints"</script>''')  
         else:
             return HttpResponse('''<script>alert("invalid"); window.location="/administrator/Viewstation"</script>''') 
 
@@ -450,7 +450,10 @@ class DeleteStudent(View):
         b=StudentTable.objects.get(id=id)
         b.delete()
         return redirect('vstudent_page') 
-   
+    
+class routepoint1(View):
+    def get(self,request):
+        return render(request,'administrator/routepoint1.html')
     
      
 
@@ -466,21 +469,92 @@ class AdminDashboard(View):
 class viewsTransportation(View):
     def get(self,request):
         r=RouteTable.objects.all()
-        return render(request, 'administrator/transportation.html',{'r':r})
+        c=StationTable.objects.all()
+        return render(request, 'administrator/transportation.html',{'r':r,'c':c})
     
 class viewsRoutepoint(View):
      def get(self,request):
-        return render(request, 'administrator/routepoint.html')
+        r=RouteTable.objects.all()
+        return render(request, 'administrator/routepoint.html',{'r':r})
      
 class viewsDepartementstudents(View):
-    def get(self,request,department):
+    def get(self,request,routeId,department):
         c=StudentTable.objects.filter(department=department).all()
         print(c)
-        return render(request, "administrator/student/view_student copy.html", {'val': c}) 
+        print(routeId)
+        return render(request, "administrator/student/view_student copy.html", {'val': c,'routeId':routeId}) 
+    
+class AddDepartmentStudents(View):
+    def post(self,request):
+            print("hhhh")
+            selected_students = request.POST.getlist('students')  # Get list of selected students
+            route_id = request.POST.get('route_id')  # Get the selected route
+            print(selected_students)
+            print(route_id)
+
+
+            route = StationTable.objects.get(id=route_id)  # Fetch route by ID
+
+            # Loop through each selected student and create a record in TranspoTable
+            for student_id in selected_students:
+                student = StudentTable.objects.get(id=student_id)
+                TranspoTable.objects.create(
+                    STUDENT=student,
+                    ROUTE=route,
+                    status='Active',  # Default status, you can modify based on your logic
+                )
+
+            # Redirect to another page or render success message
+            # Return JSON response with JavaScript to redirect outside the iframe
+            return JsonResponse({'redirect_url': '/administrator/transportationss'})
  
+
+    
+
+
+class viewsStationbyroute(View):
+    def get(self,request,route):
+        d=StationTable.objects.filter(route=route).all()
+        print(d)
+        return render(request, "administrator/station/view_station copy.html", {'val': d})
+  # Replace with your success page or URL name 
+class viewsStationbyrouteid(View):
+    def get(self,request,route):
+        print("hhh")
+        stations = StationTable.objects.filter(route=route).values('id', 'station')
+        return JsonResponse({'stations': list(stations)})
+    
+    
+# class viewsRoutedetails(View):
+#     def get(self,request,route):
+#         d=RouteTable.objects.filter(route=route).all()
+#         return render(request, "administrator/route/view_route copy.html", {'val': d}) 
+        
+    
+
+
+
 
 
     
+class viewsNotification(View):
+     def get(self,request):
+        return render(request, 'administrator/notification/notification.html')    
+ 
+
+
+
+
+
+class viewsUnauthorizedaccess(View):
+     def get(self,request):
+        return render(request, 'administrator/notification/unau.html') 
+     
+class viewsPendingfee(View):
+     def get(self,request):
+        return render(request, 'administrator/notification/pending.html') 
+     
+
 
         
     

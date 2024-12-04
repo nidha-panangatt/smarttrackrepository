@@ -1,4 +1,4 @@
-{% extends 'administrator/admindashboard.html' %}
+
 {% load static %}
 {% block body %}
 
@@ -6,12 +6,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Routes</title>   
-     <!-- <link rel="stylesheet" href="{% static 'student.css' %}"> -->
-    
-    
+    <title>Manage students</title>   
 </head>
-<style>* {
+<style>
+/* Your CSS styles here */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -75,50 +74,6 @@ h2 {
     border-bottom: 1px solid #ddd;
 }
 
-
-.status {
-    font-weight: bold;
-    font-size: 14px;
-    text-transform: uppercase;
-    margin-left: 5px;
-}
-
-.status.active {
-    color: #28a745; 
-}
-
-.status.inactive {
-    color: #dc3545; 
-}
-
-.edit-btn, .delete-btn {
-    padding: 8px 16px;
-    margin: 0 5px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
-}
-
-.edit-btn {
-    background-color: #0b9111;
-    color: white;
-}
-
-.delete-btn {
-    background-color: #dc3545;
-    color: white;
-}
-
-.edit-btn:hover {
-    background-color: #055f09;
-}
-
-.delete-btn:hover {
-    background-color: #c82333;
-}
-
 .add-btn {
     padding: 12px 25px;
     background-color: #1c1c55;
@@ -133,64 +88,75 @@ h2 {
 
 .add-btn:hover {
     background-color: #0e0e41;
-}</style>
+}
+</style>
 
 <body>
+
+    <form action="/administrator/AddDepartmentStudents" method="post">
+        <input type="hidden" value="{{routeId}}" name="route_id" id="">
     <div class="container">
         <h2>Add and Manage Student</h2>
         <table class="route-table">
-            
-
-          
-                <tr>
-                    <th>Sl.No</th>
-                    <th>Adm.No</th>
-                    <th>Name</th>
-                    <th>Department</th>
-                    <th>Semester</th>
-                    <th>E-mail</th>
-                    <th>Date of birth</th>
-                    <th>address</th>
-                    <th>Place</th>
-                    <th>phone no</th>
-                    <th>guardian</th>
-                    <th>phone no</th>
-                    <th>commuter_type</th>
-                    <th>transportation</th>
-                    <th>Actions</th>
-                </tr>
-                {% for i in val %}
-                <tr>
-                    <td>{{forloop.counter}}</td>
-                    <td>{{i.admissionno}}</td>
-                    <td>{{i.Name}}</td>
-                    <td>{{i.department}}</td>
-                    <td>{{i.sem}}</td>
-                    <td>{{i.email}}</td>
-                    <td>{{i.dob}}</td>
-                    <td>{{i.address}}</td>
-                    <td>{{i.place}}</td>
-                    <td>{{i.ph_no}}</td>
-                    <td>{{i.guardianname}}</td>
-                    <td>{{i.phoneno}}</td>
-                    <td>{{i.commuter_type}}</td>
-                    <td>{{i.transportation_type}}</td>
-
-                    
-                    <td>
-                        <button class="action-btn edit-btn"><a href="/administrator/editstudent/{{i.id}}/">Edit</a></button>
-                        
-                        <button class="action-btn delete-btn"><a href="/administrator/Deletestudent/{{i.id}}/">delete</a></button>
-                        
-                    </td>
-                </tr>
+            <tr>
+                <th>Sl.No</th>
+                <th>Adm.No</th>
+                <th>Name</th>
+                <th>Department</th>
+                <th>Semester</th>
+                <th>Phone No</th>
+                <th>Guardian</th>
+                <th>Phone No</th>
+                <th>Select</th>
+            </tr>
+            {% for i in val %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.admissionno }}</td>
+                <td>{{ i.Name }}</td>
+                <td>{{ i.department }}</td>
+                <td>{{ i.sem }}</td>
+                <td>{{ i.ph_no }}</td>
+                <td>{{ i.guardianname }}</td>
+                <td>{{ i.phoneno }}</td>
+                <td>
+                    <!-- Checkboxes for actions -->
+                    <input type="checkbox" name="students" value="{{ i.id }}">
+                </td>
+            </tr>
             {% endfor %}
-                
-           
         </table>
-        <button class="add-btn"> <a href="{% url 'addstudent_page' %}">Add</a></button>
+   
+        <button class="add-btn" type="submit">Add</button>
     </div>
-
+</form>
 </body>
+<script>
+    const form = document.querySelector('form');
+
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();  // Prevent the default form submission
+
+        const formData = new FormData(form);
+
+        // Use fetch to submit the form data asynchronously
+        fetch(form.action, {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.redirect_url) {
+                // Redirect the top window (outside iframe) to the given URL
+                window.top.location.href = data.redirect_url;
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+</script>
+
 </html>
+
 {% endblock %}

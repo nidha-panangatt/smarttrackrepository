@@ -1,0 +1,52 @@
+{% extends 'administrator/admindashboard.html' %}
+{% load static %}
+{% block body %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Routes</title>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+    <div class="container">
+        <table class="route-table">
+            <thead>
+                <tr>
+                    <th>SI.No</th>
+                    <th>Route</th>
+                    <th>Trip No</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in val %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ i.route }}</td>
+                    <td>{{ i.tripno }}</td>
+                    
+                    <!-- Status Column -->
+                    <td>
+                        {% if i.status == 'Active' %}
+                        <span class="status active">Active</span>
+                        {% else %}
+                        <span class="status inactive">Inactive</span>
+                        {% endif %}
+                    </td>
+
+                    <!-- Actions Column -->
+                    <td>
+                        <button class="action-btn edit-btn"><a href="/administrator/editbusroute/{{ i.id }}/">Edit</a></button>
+                        <button class="action-btn delete-btn"><a href="/administrator/Deletebusroute/{{ i.id }}/">Delete</a></button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <button class="add-btn"><a href="{% url 'addroute_page' %}">Add</a></button>
+    </div>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,205 @@
+
+{% extends 'administrator/admindashboard.html' %}
+{% block body %}
+
+<style>    body {
+        font-family: Arial, sans-serif;
+    }
+    
+    .tab {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+    }
+    
+    .tab button {
+        background-color: inherit;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+        font-size: 17px;
+    }
+    
+    .tab button:hover {
+        background-color: #ddd;
+    }
+    
+    .tab button.active {
+        background-color: #ccc;
+    }
+    
+    .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+    }
+    
+    .filter-container {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+    
+    .form-group {
+        margin: 10px 0;
+        flex: 1; /* Make form groups take equal space */
+    }
+    
+    .form-group label {
+        display: block;
+    }
+    
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
+    
+    table, th, td {
+        border: 1px solid black;
+    }
+    
+    th, td {
+        padding: 10px;
+        text-align: left;
+    }
+    
+    th {
+        background-color: #f2f2f2;
+    }
+    
+    .add-section {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-top: 20px;
+    }
+    
+    .add-button {
+        cursor: pointer;
+        color: green;
+        font-size: 24px;
+        padding: 10px 20px;
+        border: none;
+        background-color: #f0f0f0;
+        transition: background-color 0.3s;
+    }
+    
+    .add-button:hover {
+        background-color: #e0e0e0;
+    }
+    </style>
+
+<div class="tab">
+    <button class="tablinks" onclick="openTab('stations')">Stations</button>
+    <button class="tablinks" onclick="openTab('routes')">Routes</button>
+    
+</div>
+
+<!-- Stations Section -->
+<div id="stations" class="tabcontent">
+    <br>
+    <select id="stationFilter" onchange="handleSelectChange()">
+        <option value="">--Select a route--</option>
+        {% for i in r %}
+        <option value="{{i.id}}">{{i.route}}</option>
+        {% endfor %}
+    </select>
+
+    <!-- Load the content from view_station.html in an iframe -->
+    <iframe src="/administrator/Viewstation/"style="width: 100%; height: 1000px; border: none;"></iframe>
+</div>
+
+<!-- Routes Section -->
+<div id="routes" class="tabcontent">
+    <h3>Select a Route to View Bus Details</h3>
+    <select id="routeDropdown" onchange="handleSelectChange()">
+        
+        <option value="">--Select a route--</option>
+        {% for i in r %}
+        <option value="{{i.id}}">{{i.route}}</option>
+        {% endfor %}
+
+    </select>
+<!-- Load the content from view_station.html in an iframe -->
+    <iframe src="/administrator/Viewstation/" style="width: 100%; height: 1000px; border: none;"></iframe>
+</div>
+
+
+
+
+
+</div>
+<script>
+function handleSelectChange(){
+    const selectedValue=document.getElementById("stationFilter").value;
+    console.log(selectedValue)
+    if (selectedValue){
+        window.location.href="/administrator/routepoint1" ;
+    }
+}
+
+
+function openTab(openTab, element) {
+    // Hide all tab contents
+    document.querySelectorAll(".tabcontent").forEach(tab => tab.style.display = "none");
+    // Remove 'active' class from all tabs
+    document.querySelectorAll(".tablinks").forEach(tab => tab.classList.remove("active"));
+    // Show the selected tab content
+    document.getElementById(openTab).style.display = "block";
+    // Add 'active' class to the clicked tab
+    element.classList.add("active");
+}
+
+function toggleDetails(id) {
+    const details = document.getElementById(id);
+    details.style.display = details.style.display === "none" ? "block" : "none";
+}
+
+
+
+
+// Initially open the first tab
+openTab('stations', document.querySelector(".tablinks"));
+
+
+    // Open tab function
+    function openTab(tabName) {
+        let tabcontent = document.getElementsByClassName("tabcontent");
+        for (let i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        document.getElementById(tabName).style.display = "block";
+    }
+
+    // Filter function to filter table rows based on selected route
+    function filterTable(tableId, dropdownId) {
+        let table = document.getElementById(tableId);
+        let rows = table.getElementsByTagName("tr");
+        let filterValue = document.getElementById(dropdownId).value.toLowerCase();
+
+        for (let i = 1; i < rows.length; i++) {
+            let row = rows[i];
+            let route = row.getAttribute("data-route");
+            if (filterValue === "" || route === filterValue) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        }
+    }
+
+         // Initialize the first tab as open
+    openTab('stations');
+
+
+</script>
+
+</html>
+
+{% endblock %}
+

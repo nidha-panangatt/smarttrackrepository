@@ -1,93 +1,262 @@
-
 {% extends 'administrator/admindashboard.html' %}
 {% block body %}
 
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    .tab {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+    }
+
+    .tab button {
+        background-color: inherit;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+        font-size: 17px;
+    }
+
+    .tab button:hover {
+        background-color: #ddd;
+    }
+
+    .tab button.active {
+        background-color: #ccc;
+    }
+
+    .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+        height: 100%;
+    }
+
+    .filter-container {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        margin: 10px 0;
+        flex: 1;
+    }
+
+    .form-group label {
+        display: block;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
+
+    table, th, td {
+        border: 1px solid black;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    .add-section {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    .add-button {
+        cursor: pointer;
+        color: green;
+        font-size: 24px;
+        padding: 10px 20px;
+        border: none;
+        background-color: #f0f0f0;
+        transition: background-color 0.3s;
+    }
+
+    .add-button:hover {
+        background-color: #e0e0e0;
+    }
+
+    .loader {
+        border: 16px solid #f3f3f3;
+        border-top: 16px solid #3498db;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 2s linear infinite;
+        margin: 20px auto;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+</style>
 
 <div class="tab">
-    <button class="tablinks" onclick="openTab('stations')">Stations</button>
     <button class="tablinks" onclick="openTab('routes')">Routes</button>
+    <button class="tablinks" onclick="openTab('stations')">Stations</button>
+    
     
 </div>
+<!-- Routes Section -->
+<div id="routes" class="tabcontent">
+  
+    
+    <!-- Route Dropdown -->
+    <select id="routeDropdown" onchange="filterRouteDetails()">
+        <option value="">--Select a route--</option>
+        {% for route in r %}
+        <option value="{{ route.id }}">{{ route.route }}</option>
+        {% endfor %}
+    </select>
+
+    <!-- Container to display route details -->
+    <div id="routeDetailsContainer">
+        <!-- Initially show the entire route details -->
+        <div class="loader"></div>  <!-- Loader to show while data is being loaded -->
+    </div>
+</div>
+
 
 <!-- Stations Section -->
 <div id="stations" class="tabcontent">
     <br>
-    <select id="stationFilter" onchange="filterTable('stationTable', 'stationFilter')">
-        <option value="">--Select route--</option>
-        <option value="manjeri">Manjeri</option>
-        <option value="mlp">Malappuram</option>
-        <option value="kdy">Kondotty</option>
-    </select>
-
-    <!-- Load the content from view_station.html in an iframe -->
-    <iframe src="/administrator/editbusco/{{i.id}}/"style="width: 100%; height: 1000px; border: none;"></iframe>
-</div>
-
-<!-- Routes Section -->
-<div id="routes" class="tabcontent">
-    <h3>Select a Route to View Bus Details</h3>
-    <select id="routeDropdown" onchange="filterTable('routeTable', 'routeDropdown')">
+    <select id="routeFilter" onchange="handleRouteSelectChange()">
         <option value="">--Select a route--</option>
-        <option value="manjeri">Manjeri</option>
-        <option value="mlp">Malappuram</option>
-        <option value="kdy">Kondotty</option>
+        {% for route in r %}
+        <option value="{{ route.id }}">{{ route.route }}</option>
+        {% endfor %}
     </select>
-<!-- Load the content from view_station.html in an iframe -->
-    <iframe src="view_route.html" style="width: 100%; height: 1000px; border: none;"></iframe>
+
+    <!-- Container where the station table will be injected -->
+    <div id="stationsContainer">
+        <!-- Initially show the entire stations list (without any route filter) -->
+        <div class="loader"></div>  <!-- Loader to show while data is being loaded -->
+    </div>
 </div>
 
 
-
-
-
-</div>
-<script>function openTab(openTab, element) {
-    // Hide all tab contents
-    document.querySelectorAll(".tabcontent").forEach(tab => tab.style.display = "none");
-    // Remove 'active' class from all tabs
-    document.querySelectorAll(".tablinks").forEach(tab => tab.classList.remove("active"));
-    // Show the selected tab content
-    document.getElementById(openTab).style.display = "block";
-    // Add 'active' class to the clicked tab
-    element.classList.add("active");
-}
-
-function filterStudents() {
-    const selectedRoute = document.getElementById("stationFilter").value;
-    const studentList = document.getElementById("studentList");
-    studentList.innerHTML = ""; // Clear previous content
-
-    if (selectedRoute) {
-        let tableHTML = `<h4>Students in ${selectedRoute.charAt(0).toUpperCase() + selectedRoute.slice(1)} Route</h4>`;
+<script>
+    // Initially load all stations
+    window.addEventListener('DOMContentLoaded', (event) => {
+        loadStations(); 
+        loadRoutes();  // This will load the entire route details on page load
+          // This will load the entire station list on page load
        
-      
-           }
-}
+    });
 
-function toggleDetails(id) {
-    const details = document.getElementById(id);
-    details.style.display = details.style.display === "none" ? "block" : "none";
-}
+    // Handle route selection in stations section
+    function handleRouteSelectChange() {
+        const selectedValue = document.getElementById("routeFilter").value;
+        const stationsContainer = document.getElementById("stationsContainer");
 
+        // Show loader while fetching data
+        stationsContainer.innerHTML = "<div class='loader'></div>";
 
-
-function showRouteInfo() {
-    const selectedRoute = document.getElementById("routeDropdown").value;
-    const routeInfo = document.getElementById("routeInfo");
-    routeInfo.innerHTML = ""; // Clear previous content
-
-    if (selectedRoute) {
-        routeInfo.innerHTML = `<h4>Information about ${selectedRoute.replace("-", " to ").toUpperCase()}</h4>
-            <p>Details about the selected route will be displayed here.</p>`;
+        if (selectedValue) {
+            // Make an AJAX request to fetch the station table for the selected route
+            fetch(`/administrator/stationbyroute/${selectedValue}/`)
+                .then(response => response.text())  // Expect HTML as response
+                .then(data => {
+                    // Inject the returned HTML (the table) into the stations container
+                    stationsContainer.innerHTML = data;
+                })
+                .catch(error => {
+                    stationsContainer.innerHTML = "<p>Error loading station table. Please try again later.</p>";
+                    console.error(error);
+                });
+        } else {
+            // Clear the station table if no route is selected
+            loadStations();  // If no route is selected, reload the full station list
+        }
     }
-}
 
+    // Function to load all stations (without any filters)
+    function loadStations() {
+        const stationsContainer = document.getElementById("stationsContainer");
 
-// Initially open the first tab
-openTab('stations', document.querySelector(".tablinks"));
+        // Show loader while fetching data
+        stationsContainer.innerHTML = "<div class='loader'></div>";
 
+        // Make an AJAX request to fetch all stations
+        fetch("/administrator/Viewstation/")  // Fetch full station list
+            .then(response => response.text())
+            .then(data => {
+                // Inject the returned HTML (the full station list) into the stations container
+                stationsContainer.innerHTML = data;
+            })
+            .catch(error => {
+                stationsContainer.innerHTML = "<p>Error loading station data. Please try again later.</p>";
+                console.error(error);
+            });
+    }
 
-    // Open tab function
+    // Function to load route details
+    function loadRoutes() {
+        const routeDetailsContainer = document.getElementById("routeDetailsContainer");
+
+        // Show loader while fetching data
+        routeDetailsContainer.innerHTML = "<div class='loader'></div>";
+
+        // Make an AJAX request to fetch all route details
+        fetch("/administrator/Viewroute/")  // Fetch full route list
+            .then(response => response.text())
+            .then(data => {
+                // Inject the returned HTML (the full route list) into the route details container
+                routeDetailsContainer.innerHTML = data;
+            })
+            .catch(error => {
+                routeDetailsContainer.innerHTML = "<p>Error loading route details. Please try again later.</p>";
+                console.error(error);
+            });
+    }
+
+    // Function to filter route details when a route is selected
+    function filterRouteDetails() {
+        const selectedRoute = document.getElementById("routeDropdown").value;
+        const routeDetailsContainer = document.getElementById("routeDetailsContainer");
+
+        // Show loader while fetching data
+        routeDetailsContainer.innerHTML = "<div class='loader'></div>";
+
+        if (selectedRoute) {
+            // Make an AJAX request to fetch the filtered route details
+            fetch(`/administrator/Viewroute/${selectedRoute}/`)
+                .then(response => response.text())  // Expect HTML as response
+                .then(data => {
+                    // Inject the filtered route details into the container
+                    routeDetailsContainer.innerHTML = data;
+                })
+                .catch(error => {
+                    routeDetailsContainer.innerHTML = "<p>Error loading route details. Please try again later.</p>";
+                    console.error(error);
+                });
+        } else {
+            // If no route is selected, display the entire route table
+            loadRoutes();  // Reload the full route list if no route is selected
+        }
+    }
+
+    // Function to open specific tab
     function openTab(tabName) {
         let tabcontent = document.getElementsByClassName("tabcontent");
         for (let i = 0; i < tabcontent.length; i++) {
@@ -96,30 +265,10 @@ openTab('stations', document.querySelector(".tablinks"));
         document.getElementById(tabName).style.display = "block";
     }
 
-    // Filter function to filter table rows based on selected route
-    function filterTable(tableId, dropdownId) {
-        let table = document.getElementById(tableId);
-        let rows = table.getElementsByTagName("tr");
-        let filterValue = document.getElementById(dropdownId).value.toLowerCase();
-
-        for (let i = 1; i < rows.length; i++) {
-            let row = rows[i];
-            let route = row.getAttribute("data-route");
-            if (filterValue === "" || route === filterValue) {
-                row.style.display = "";
-            } else {
-                row.style.display = "none";
-            }
-        }
-    }
-
-         // Initialize the first tab as open
-    openTab('stations');
-
-
+    // Open the default tab on page load
+    document.addEventListener("DOMContentLoaded", function() {
+        openTab('routes');
+    });
 </script>
 
-</html>
-
 {% endblock %}
-

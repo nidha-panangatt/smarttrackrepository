@@ -1,0 +1,108 @@
+{% extends 'administrator/admindashboard.html' %}
+{% block body %}
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-color: #f4f4f9;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .header {
+      background-color:#1c1c55;
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+    }
+
+    .header h1 {
+      font-size: 1.5rem;
+    }
+
+    .notifications {
+      list-style: none;
+      padding: 10px;
+    }
+
+    .notification-item {
+      display: flex;
+      align-items: center;
+      background: #f9f9f9;
+      margin-bottom: 10px;
+      padding: 15px;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+      transition: background 0.3s;
+    }
+
+    .notification-item:hover {
+      background: #e6f7ff;
+    }
+
+    .notification-icon {
+      margin-right: 15px;
+      font-size: 1.5rem;
+      color: #007bff;
+    }
+
+    .notification-content {
+      flex: 1;
+    }
+
+    .notification-title {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .notification-title a {
+      text-decoration: none;
+    }
+
+    .notification-time {
+      font-size: 0.9rem;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+ 
+    <div class="header">
+      <h1>Notifications</h1>
+    </div>
+    <ul class="notifications">
+      <li class="notification-item">
+        <div class="notification-icon">🔔</div>
+        <div class="notification-content">
+          <div class="notification-title">  <a href="{% url 'unauthorized_access' %}">UNAUTHORISED ACCESS</a>
+          </div>
+          <div class="notification-time">2 minutes ago</div>
+        </div>
+      </li>
+      <li class="notification-item">
+        <div class="notification-icon">📩</div>
+        <div class="notification-content">
+          <div class="notification-title"> <a href="{% url 'pending_fee' %}">PENDING FEE</a>
+          </div>
+          <div class="notification-time">1 hour ago</div>
+   
+      </li>
+      
+     
+    </ul>
+  </div>
+</body>
+
+{% endblock %} 

@@ -13,7 +13,7 @@ admin.site.register(AddstudentTable),
 admin.site.register(RouteTable),
 admin.site.register(StationTable),
 admin.site.register(StudentTable),
-admin.site.register(TranspoTable),
+# admin.site.register(TranspoTable),
 admin.site.register(BusdetailsTable)
 
 

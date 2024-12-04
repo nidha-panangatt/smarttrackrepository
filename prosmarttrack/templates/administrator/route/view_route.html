@@ -1,35 +1,39 @@
 
 
-
-<!DOCTYPE html>
+{% extends 'administrator/admindashboard.html' %}
+{% load static %}
+{% block body %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Routes</title>
-   <link rel="stylesheet" href="">
-    </style>
+    <link rel="stylesheet" href="">
 </head>
 <body>
     <div class="container">
-        <h2>Add and Manage Routes</h2>
         <table class="route-table">
-            
-                <tr>
-                    <th>SI.No</th>
-                    <th>Route</th>
-                    <th>Trip No</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                </tr>
-                {% for i in val %}
-                <tr>
-                    <td>{{forloop.counter}}</td>
-                    <td>{{i.route}}</td>
-                    <td>{{i.tripno}}</td>
-                    <td></td>
-                    <td><span class="status active">Active</span></td>
-                    <td>
+            <tr>
+                <th>SI.No</th>
+                <th>Route</th>
+                <th>Trip No</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+            {% for i in val %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.route }}</td>
+                <td>{{ i.tripno }}</td>
+                <td>
+                    <!-- Display the status dynamically -->
+                    {% if i.status == 'Active' %}
+                    <span class="status active">Active</span>
+                    {% else %}
+                    <span class="status inactive">Inactive</span>
+                    {% endif %}
+                </td>
+                <td>
                         <button class="action-btn edit-btn"><a href="/administrator/editbusroute/{{i.id}}/">Edit</a></button>
                         <button class="action-btn delete-btn"><a href="/administrator/Deletebusroute/{{i.id}}/">delete</a></button>
                     </td>
@@ -43,3 +47,4 @@
 </body>
 </html>
 
+{% endblock %}

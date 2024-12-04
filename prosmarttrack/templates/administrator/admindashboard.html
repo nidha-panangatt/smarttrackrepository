@@ -20,11 +20,7 @@
         </div>
        
         <ul class="nav-list">
-            <li>
-                <i class='bx bx-search'></i>
-                <input type="search" placeholder="search..">
-                <span class="tooltip">Search</span>
-            </li>
+            
             <li>
                  <a href="{% url 'vguard_page' %}">
                     
@@ -50,35 +46,32 @@
             </li>
             <li>
                 <a href="{% url 'vbusco_page' %}">
-                    <i class='bx bx-bus icon'></i>
-                    <span class="links_name">Bus Coordinators</span>
+
+                    <i class="fa-solid fa-user-plus"></i>
+                     <span class="links_name">Bus Coordinators</span>
                 </a>
                 <span class="tooltip">Bus Coordinator</span>
             </li>
+
             <li>
                 <a href="{% url 'vstaff_page' %}">
 
-                    <i class="fa-solid fa-map-location-dot icon"></i>
+                    
+                    <i class='bx bx-group'></i>
                     <span class="links_name">Bus Staff </span>
                 </a>
                 <span class="tooltip">Bus Staff</span>
             </li>
-            <li>
+            <li> 
                 <a href="{% url 'vbusdetail_page' %}">
 
-                    <i class="fa-solid fa-map-location-dot icon"></i>
+                    <i class='bx bx-bus icon'></i>
                     <span class="links_name"> Bus Details</span>
                 </a>
                 <span class="tooltip"> Bus Details</span>
             </li>
-            <li>
+           
 
-                 #<a href="{% url 'vroute_page' %}">
-                    <i class="fa-solid fa-map-location-dot icon"></i>
-                    <span class="links_name">Route Points</span>
-                </a>
-                <span class="tooltip">Route Points</span>
-            </li>
             <li>
                 <a href="{% url 'transportationss' %}" onclick="loadContent('transportation.html')">
                     <i class='bx bx-money icon'></i>
@@ -88,11 +81,19 @@
             </li>
             <li>
                 <a href="{% url 'routepoint' %}" onclick="loadContent('routepoint.html')">
-                    <i class='bx bx-money icon'></i>
-                    <span class="links_name">routepoint</span>
+                    <i class="fa-solid fa-map-location-dot icon"></i>
+                    <span class="links_name">Route Points</span>
                 </a>
                 <span class="tooltip">routepoint</span>
             </li>
+          
+                
+
+            <li>
+                <a href="{% url 'notifications' %}"onclick="loadContent('notification.html')">
+                    <i class='bx bx-bell'></i>
+                    <span class="links_name">notification</span>
+                </a>
             <li>
                 <a href="#" onclick="loadContent('.html')">
                     <i class='bx bx-current-location icon'></i>
@@ -111,7 +112,7 @@
         </ul>
     </div>
     <div class="home_content">
-        <div class="text" id="content"> here.</div>
+        <div class="text" id="content"></div>
         {% block body %}
         {% endblock %}
     </div>

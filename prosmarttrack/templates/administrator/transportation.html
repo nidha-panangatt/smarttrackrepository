@@ -94,8 +94,9 @@
     </style>
 
 <div class="tab">
-    <button class="tablinks" onclick="openTab('transportation')">Transportation</button>
     <button class="tablinks" onclick="openTab('addStudents')">Add Students</button>
+    <button class="tablinks" onclick="openTab('transportation')">Transportation</button>
+    
 </div>
 
 <!-- Transportation Section -->
@@ -111,12 +112,14 @@
          
                 {% endfor %}
             </select>
+            
         </div>
     </div>
+    
 
     <!-- Embedding view_transpo.html -->
     <div class="iframe-container">
-        <iframe src="view_transpo.html" style="width: 100%; height: 600px; border: none;"></iframe>
+        <iframe id="studentsIframe1" src=""  style="width: 100%; height: 600px; border: none;">aaa</iframe>
     </div>
 </div>
 
@@ -125,7 +128,7 @@
     <div class="filter-container">
         <div class="form-group">
             <label for="routeDropdown"></label>
-            <select id="routeDropdown">
+            <select id="routeDropdown"  onchange="updateStations()">
                 <option value="">--Select Route--</option>
                 {% for i in r %}
                 <option value="{{i.id}}">{{i.route}}</option>
@@ -133,13 +136,47 @@
                 {% endfor %}
                 
             </select>
+            <select id="stationDropdown">
+                <option value="">--Select Station--</option>
+                <!-- Stations will be dynamically populated -->
+            </select>
         </div>
         <script>
+        function updateStations() {
+            
+        const routeId = document.getElementById('routeDropdown').value;
+        console.log(routeId)
+
+        if (routeId) {
+            fetch(`/administrator/stationbyrouteid/${routeId}`)
+                .then(response => response.json())
+                .then(data => {
+                    const stationDropdown = document.getElementById('stationDropdown');
+                    stationDropdown.innerHTML = '<option value="">--Select Station--</option>'; // Reset options
+
+                    data.stations.forEach(station => {
+                        const option = document.createElement('option');
+                        option.value = station.id;
+                        option.textContent = station.station;
+                        stationDropdown.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Error fetching stations:', error));
+        } else {
+            // Clear station dropdown if no route is selected
+            document.getElementById('stationDropdown').innerHTML = '<option value="">--Select Station--</option>';
+        }
+    }
+
+
             function handleSelectChange(){
-                const selectedValue=document.getElementById("departmentFilter").value;
-                console.log(selectedValue)
-                if (selectedValue){
-                    window.location.href="/administrator/departmentstudents/"+ selectedValue ;
+                const selectedValue = document.getElementById("departmentFilter").value;
+                const routeId = document.getElementById("routeDropdown").value;
+                if (selectedValue) {
+                    // Update iframe source dynamically
+                    console.log(routeId)
+                    console.log(selectedValue)
+                    document.getElementById("studentsIframe").src = '/administrator/departmentstudents/' + routeId + '/' + selectedValue;
                 }
             }
         </script>
@@ -157,7 +194,7 @@
 
     <!-- Embedding view_students.html -->
     <div class="iframe-container">
-        <iframe src="" style="width: 100%; height: 600px; border: none;"></iframe>
+        <iframe id="studentsIframe" src="" style="width: 100%; height: 600px; border: none;"></iframe>
     </div>
 </div>
 
@@ -172,7 +209,7 @@ function openTab(tabName) {
 }
 
 // Initialize the first tab as open
-openTab('transportation');
+openTab('addStudents');
 </script>
 
 {% endblock %} 

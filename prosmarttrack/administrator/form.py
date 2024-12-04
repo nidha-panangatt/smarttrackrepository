@@ -41,10 +41,10 @@ class StudentForm(ModelForm):
                   'guardianname','phoneno','transportation_type','commuter_type','route'
                 ]
         
-class TranspoForm(ModelForm):
-    class Meta:
-        model = TranspoTable
-        fields = ['STUDENT', 'ROUTE','status']
+# class TranspoForm(ModelForm):
+#     class Meta:
+#         model = TranspoTable
+#         fields = ['STUDENT', 'ROUTE','status']
 
 class AddstudentForm(ModelForm):
     class Meta:
