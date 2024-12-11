@@ -42,7 +42,7 @@ urlpatterns = [
     path('Viewstation/',ViewStation.as_view(),name="vstation_page"),
     path('Viewstudent/',ViewStudent.as_view(),name="vstudent_page"),
     path('Viewtranspo/',ViewTranspo.as_view(),name="vtranspo_page"),
-    path('Viewaddstudent/',ViewStudent.as_view(),name="vaddstudent_page"),
+    #path('Viewaddstudent/',ViewsAddstudent.as_view(),name="vaddstudent_page"),
     path('Viewbusdetails',ViewBusdetails.as_view(),name="vbusdetail_page"),
     path('Viewstudentdetails/<int:id>/',ViewStudentdetails.as_view(),name="vgsdetail_page"),
 
@@ -55,7 +55,7 @@ urlpatterns = [
     path('editbusdetails/<int:id>/',EditBusdetails.as_view(),name="ebusdetails_page"),
     path('editbusroute/<int:id>/',EditRoute.as_view(),name="eroute_page"),
     path('editstation/<int:id>/',EditStation.as_view(),name="estation_page"),
-    
+    path('edittranspo/<int:id>/',EditTranspo.as_view(),name="etranspo_page"),
     
     
     
@@ -68,11 +68,14 @@ urlpatterns = [
     path('Deletebusdetails/<int:id>/',DeleteBusdetails.as_view(),name='Ddetail_page'),
     path('Deletebusroute/<int:id>/',DeleteRoute.as_view(),name="Deletebusroute"),
     path('Deletestation/<int:id>/',DeleteStation.as_view(),name="Dstation_page"),
+    # path('Deletetranspo/<int:id>/',DeleteTranspo.as_view(),name="Dtranspo_page"),
+
     
 
     path('transportationss', viewsTransportation.as_view(), name='transportationss'),
     path('routepoints', viewsRoutepoint.as_view(), name='routepoint'),
-    path('departmentstudents/<int:routeId>/<str:department>/',viewsDepartementstudents.as_view(),name='departmentstudentss'),
+    path('departmentstudents/<int:routeId>/<str:department>/<int:stationId>',viewsDepartementstudents.as_view(),name='departmentstudentss'),
+    path('save_student_station/',viewsDepartementstudents.as_view(),name='viewsDepartementstudents'),
     path('notifications', viewsNotification.as_view(), name='notifications'),
     path('stationbyroute/<str:route>/', viewsStationbyroute.as_view(), name='   '),
     path('stationbyrouteid/<str:route>/', viewsStationbyrouteid.as_view(), name='stationbyrouteid'),

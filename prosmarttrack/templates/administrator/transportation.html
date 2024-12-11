@@ -171,12 +171,14 @@
 
             function handleSelectChange(){
                 const selectedValue = document.getElementById("departmentFilter").value;
+                const stationId = document.getElementById("stationDropdown").value;
                 const routeId = document.getElementById("routeDropdown").value;
                 if (selectedValue) {
                     // Update iframe source dynamically
                     console.log(routeId)
                     console.log(selectedValue)
-                    document.getElementById("studentsIframe").src = '/administrator/departmentstudents/' + routeId + '/' + selectedValue;
+                    console.log(stationId)
+                    document.getElementById("studentsIframe").src = '/administrator/departmentstudents/' + routeId + '/' + selectedValue + '/' + stationId;
                 }
             }
         </script>
@@ -206,6 +208,10 @@ function openTab(tabName) {
         tabcontent[i].style.display = "none";
     }
     document.getElementById(tabName).style.display = "block";
+        // Dynamically set iframe source for the "Transportation" tab
+    if (tabName === 'transportation') {
+        document.getElementById("studentsIframe1").src ="{% url 'vtranspo_page' %}"; // Set the desired page URL here
+    }
 }
 
 // Initialize the first tab as open

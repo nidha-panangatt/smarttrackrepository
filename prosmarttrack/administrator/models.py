@@ -86,9 +86,13 @@ class StationTable(models.Model):
 class AddstudentTable(models.Model):
     STUDENT = models.ForeignKey(StudentTable, on_delete=models.CASCADE)
     STATION=models.ForeignKey(StationTable, on_delete=models.CASCADE)
+    status=models.CharField(max_length=10,null=True,blank=True,default='active')
     created_at=models.DateTimeField(auto_now_add=True, null=True, blank=True)
     updated_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     
+class TranspoTable(models.Model):
+    STUDENT = models.ForeignKey(StudentTable, on_delete=models.CASCADE)
+    status=models.CharField(max_length=10,null=True,blank=True)
 
 
 

@@ -1,5 +1,6 @@
 
 from django.shortcuts import render,redirect
+from django.urls import reverse
 from django.views import View
 from django.http import HttpResponse, JsonResponse
 
@@ -200,8 +201,20 @@ class Transportation(View):
 
 class ViewTranspo(View):
     def get(self, request):
-        transpo_obj =TranspoTable.objects.all()
-        return render(request, "administrator/transpo/view_transpo.html", {'val': transpo_obj})        
+        st_obj =AddstudentTable.objects.all()
+        return render(request, "administrator/transpo/view_transpo.html", {'val': st_obj})  
+
+class EditTranspo(View):
+    def get(self, request,id):
+        a = AddstudentTable.objects.get(id=id)
+        return render(request, "administrator/transpo/edit_transpo.html", {'val': a}) 
+    def post(self, request, id):
+            obj = AddstudentTable.objects.get(id=id)
+            form =AddstudentForm(request.POST, instance=obj)
+            if form.is_valid():
+                form.save()
+                return HttpResponse('''<script>alert("successfully edited"); window.location="/administrator/Viewtranspo/"</script>''') 
+          
     
 
 class Addtransportation(View):
@@ -476,13 +489,61 @@ class viewsRoutepoint(View):
      def get(self,request):
         r=RouteTable.objects.all()
         return render(request, 'administrator/routepoint.html',{'r':r})
-     
+import json    
 class viewsDepartementstudents(View):
-    def get(self,request,routeId,department):
+    def get(self,request,routeId,department,stationId):
         c=StudentTable.objects.filter(department=department).all()
         print(c)
         print(routeId)
-        return render(request, "administrator/student/view_student copy.html", {'val': c,'routeId':routeId}) 
+        print(stationId)
+        # Get the students already assigned to this station
+        assigned_students = AddstudentTable.objects.filter(STATION=stationId).values_list('STUDENT_id', flat=True)
+
+        # Add a flag to each student to indicate if they are assigned
+        students_with_flag = []
+        for student in c:
+            students_with_flag.append({
+                'id': student.id,
+                'admissionno': student.admissionno,
+                'Name': student.Name,
+                'department': student.department,
+                'sem': student.sem,
+                'ph_no': student.ph_no,
+                'guardianname': student.guardianname,
+                'phoneno': student.phoneno,
+                'is_assigned': student.id in assigned_students  # Check if student is assigned
+            })
+        print(students_with_flag)
+
+        return render(request, "administrator/student/view_student copy.html", {
+            'val': students_with_flag,
+            'routeId': routeId,
+            'stationId': stationId
+        })
+    def post(self,request):
+            try:
+                data = json.loads(request.body)  # Parse JSON from the request
+                student_ids = data.get("student_ids", [])
+                station_id = data.get("station_id")
+                print("ddd",student_ids)
+                print(station_id)
+                
+                # Validate station
+                station = StationTable.objects.get(id=station_id)
+
+                # Save each student with the station
+                for student_id in student_ids:
+                    student = StudentTable.objects.get(id=student_id)
+                    AddstudentTable.objects.create(STUDENT=student, STATION=station)
+                # Respond with a redirect URL
+                return JsonResponse({
+                    "redirect_url": reverse("transportationss"),  # Use the name of the URL pattern
+                    "message": "Students successfully assigned to the station."
+                })
+                
+            except Exception as e:
+                return JsonResponse({"success": False, "message": str(e)})
+            return JsonResponse({"success": False, "message": "Invalid request method"}) 
     
 class AddDepartmentStudents(View):
     def post(self,request):
@@ -555,10 +616,7 @@ class viewsPendingfee(View):
         return render(request, 'administrator/notification/pending.html') 
      
 
-
-        
-    
-    
+# //////////////student api//////////
     
       
       

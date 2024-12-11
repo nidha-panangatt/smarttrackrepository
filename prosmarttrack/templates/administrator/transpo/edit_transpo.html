@@ -11,37 +11,37 @@
 <body>
     <div class="form-container">
         <h2>Edit </h2>
-        <form action="#" method="post">
+        <form action="" method="post">
             {%csrf_token %}
             <div class="form-group">
                 <label for="studentName">Student Name:</label>
-                <input type="text" id="studentName" name="studentName" required>
+                <input type="text" id="studentName" name="studentName" value="{{val.Name}}"required>
             </div>
 
             <div class="form-group">
-                <label for="adnNo">Admission No:</label>
-                <input type="text" id="adnNo" name="adnNo" required>
+                <label for="admissionno">Admission No:</label>
+                <input type="text" id="admissionno" name="admissionno" value="{{val.admissionno}}"   required>
             </div>
 
             <div class="form-group">
-                <label for="batch">Batch:</label>
-                <input type="text" id="batch" name="batch" required>
+                <label for="department">Department:</label>
+                <input type="text" id="department" name="department"  value="{{val.department }}"required>
             </div>
-
+            <div class="form-group">
+                <label for="semester">Semester:</label>
+                <input type="text" id="semester" name="sem" value="{{val.sem}}" required>
+            </div>
             <div class="form-group">
                 <label for="route">Route:</label>
-                <input type="text" id="route" name="route" required>
+                <input type="text" id="route" name="route"  value="{{val.route}}"required>
             </div>
 
             <div class="form-group">
                 <label for="station">Station:</label>
-                <input type="text" id="station" name="station" required>
+                <input type="text" id="station" name="station" value="{{val.station}}"required>
             </div>
 
-            <div class="form-group">
-                <label for="charge">Charge:</label>
-                <input type="text" id="charge" name="charge" required>
-            </div>
+           
 
             <div class="form-group">
                 <label>Status:</label>

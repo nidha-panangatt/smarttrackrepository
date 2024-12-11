@@ -18,8 +18,8 @@
             
                 <tr>
                     <th>S. No</th>
-                    <th>Ad.No</th>
                     <th>Student Name</th>
+                    <th>admissionno</th>
                     <th>department</th>
                     <th>sem</th>
                     <th>Route</th>
@@ -27,29 +27,29 @@
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
-            
+                {% for i in val %}
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <th></th>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.STUDENT.Name}}</td>
+                    <td>{{i.STUDENT.admissionno}}</td>
+                    <td>{{i.STUDENT.department}}</td>
+                    <td>{{i.STUDENT.sem}}</td>
+                    <td>{{i.STATION.route.route}}</td>
+                    <td>{{i.STATION.station}}</td>
+                    <td>{{i.status}}</td>
+                  
                     
                     
                     <td>
-                        <button class="action-btn edit-btn"><a href="/administrator/editbusroute/{{i.id}}/">Edit</a></button>
+                        <button class="action-btn edit-btn"><a href="/administrator/edittranspo/{{i.id}}/">Edit</a></button>
                         <button class="action-btn delete-btn"><a href="/administrator/editbusroute/{{i.id}}/">Delete</a></button>
                     </td>
                 </tr>
                 
-                
+                {% endfor %}
        
         </table>
-        <button class="add-btn">Add </button>
-    </div>
+       
 
 </body>
 </html>
