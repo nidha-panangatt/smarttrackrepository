@@ -54,7 +54,10 @@ class AddstudentForm(ModelForm):
 class BusdetailForm(ModelForm):
     class Meta:
         model = BusdetailsTable
-        fields = ['route', 'vehicleno','staff']        
+        fields = ['route','station', 'vehicleno','capacity']        
 
-
+class PaymentForm(ModelForm):
+    class Meta:
+        model=PaymentTable
+        fielsd=['STUDENT','date','STATION']
 

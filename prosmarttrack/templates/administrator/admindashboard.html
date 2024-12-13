@@ -87,8 +87,18 @@
                 <span class="tooltip">routepoint</span>
             </li>
           
-                
-
+             <li>
+                <a href="{% url 'entryexitpage' %}" onclick="loadContent('.html')">
+                    <i class='bx bx-current-location icon'></i>
+                    <span class="links_name">entry/exit</span>
+                </a>
+             </li>   
+             <li>
+                <a href="{% url 'notifications' %}"onclick="loadContent('payment.html')">
+                    <i class='bx bx-bell'></i>
+                    <span class="links_name">payment</span>
+                </a>
+            <li>
             <li>
                 <a href="{% url 'notifications' %}"onclick="loadContent('notification.html')">
                     <i class='bx bx-bell'></i>

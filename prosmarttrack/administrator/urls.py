@@ -39,6 +39,7 @@ urlpatterns = [
     path('Viewbusstaff/',ViewBusstaff.as_view(),name="vstaff_page"),
     #path('Viewcharges/',ViewCharges.as_view(),name="vcharges_page"),
     path('Viewroute/',ViewRoute.as_view(),name="vroute_page"),
+    path('Viewroute/<str:route>/',ViewRoute1.as_view(),name="vroute_page"),
     path('Viewstation/',ViewStation.as_view(),name="vstation_page"),
     path('Viewstudent/',ViewStudent.as_view(),name="vstudent_page"),
     path('Viewtranspo/',ViewTranspo.as_view(),name="vtranspo_page"),
@@ -68,21 +69,24 @@ urlpatterns = [
     path('Deletebusdetails/<int:id>/',DeleteBusdetails.as_view(),name='Ddetail_page'),
     path('Deletebusroute/<int:id>/',DeleteRoute.as_view(),name="Deletebusroute"),
     path('Deletestation/<int:id>/',DeleteStation.as_view(),name="Dstation_page"),
-    # path('Deletetranspo/<int:id>/',DeleteTranspo.as_view(),name="Dtranspo_page"),
+    path('Deletetranspo/<int:id>/',DeleteTranspo.as_view(),name="Dtranspo_page"),
 
     
 
     path('transportationss', viewsTransportation.as_view(), name='transportationss'),
     path('routepoints', viewsRoutepoint.as_view(), name='routepoint'),
-    path('departmentstudents/<int:routeId>/<str:department>/<int:stationId>',viewsDepartementstudents.as_view(),name='departmentstudentss'),
+    path('departmentstudents/<int:routeId>/<str:department>/<int:stationId>/', viewsDepartementstudents.as_view(), name='departmentstudentss'),
     path('save_student_station/',viewsDepartementstudents.as_view(),name='viewsDepartementstudents'),
     path('notifications', viewsNotification.as_view(), name='notifications'),
     path('stationbyroute/<str:route>/', viewsStationbyroute.as_view(), name='   '),
     path('stationbyrouteid/<str:route>/', viewsStationbyrouteid.as_view(), name='stationbyrouteid'),
+    # path('routebyroute/<str:route>/', viewsRoutebyroute.as_view(), name='   '),
+    # path('routebyrouteid/<str:route>/', viewsRoutebyrouteid.as_view(), name='routebyrouteid'),
     path('unauthorized/', viewsUnauthorizedaccess.as_view(), name='unauthorized_access'),
     path('pending/',viewsPendingfee.as_view(), name='pending_fee'),
     # path('routedetails/<str:route>/',viewsRoutedetails.as_view(), name='routedetails'),
-   
+    path('entry/',viewsEntryexit.as_view(), name='entryexitpage'),
+    
 ]
 
 

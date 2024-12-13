@@ -16,14 +16,24 @@
         <form action="" method="post">
             {%csrf_token %}
 
-            <label for="route">Route</label>
-            <input type="text" id="route" name="route" value="{{val.route}}" required>
+            <div class="form-group">
+                <label for="route">ROUTE:</label>
+                <select name="route" id="route" placeholder="route">
+                    <option value="" disabled selected>select the route</option>
+                    {% for i in b %}
+                    <option value="{{i.id}}" {% if i.id == val.route.id %} selected {% endif %}>{{i.route}}</option>
+                    {% endfor %}
 
             <label for="vehicleno">Vehicle no:</label>
-            <input type="text" id="vehicleno" name="vehicleno"value="{{val.vehicleno}}" required>
+            <input type="text" id="vehicleno" name="vehicleno" value="{{val.vehicleno}}" required>
 
-            <label for="staff">staff</label>
-            <input type="text" id="staff" name="staff" value="{{val.staff}}" required>
+            <label for="station">Station</label>
+            <input type="text" id="station" name="station" value="{{val.station}}" required>
+
+           
+
+            <label for="capacity">Capacity</label>
+            <input type="text" id="capacity" name="capacity" value="{{val.capacity}}" required>
 
             <input type="submit" value="Submit">
         </form>

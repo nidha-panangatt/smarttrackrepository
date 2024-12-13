@@ -15,30 +15,30 @@
             {%csrf_token %}
             <div class="form-group">
                 <label for="studentName">Student Name:</label>
-                <input type="text" id="studentName" name="studentName" value="{{val.Name}}"required>
+                <input type="text" id="studentName" name="studentName" value="{{val.STUDENT.Name}}"required>
             </div>
 
             <div class="form-group">
                 <label for="admissionno">Admission No:</label>
-                <input type="text" id="admissionno" name="admissionno" value="{{val.admissionno}}"   required>
+                <input type="text" id="admissionno" name="admissionno" value="{{val.STUDENT.admissionno}}"   required>
             </div>
 
             <div class="form-group">
                 <label for="department">Department:</label>
-                <input type="text" id="department" name="department"  value="{{val.department }}"required>
+                <input type="text" id="department" name="department"  value="{{val.STUDENT.department }}"required>
             </div>
             <div class="form-group">
                 <label for="semester">Semester:</label>
-                <input type="text" id="semester" name="sem" value="{{val.sem}}" required>
+                <input type="text" id="semester" name="sem" value="{{val.STUDENT.sem}}" required>
             </div>
             <div class="form-group">
                 <label for="route">Route:</label>
-                <input type="text" id="route" name="route"  value="{{val.route}}"required>
+                <input type="text" id="route" name="route"  value="{{val.STATION.route.route}}"required>
             </div>
 
             <div class="form-group">
                 <label for="station">Station:</label>
-                <input type="text" id="station" name="station" value="{{val.station}}"required>
+                <input type="text" id="station" name="station" value="{{val.STATION.station}}"required>
             </div>
 
            
@@ -46,10 +46,10 @@
             <div class="form-group">
                 <label>Status:</label>
                 <div class="radio-group">
-                    <input type="radio"  id="active" name="status" value="active" required>
+                    <input type="radio"  id="active" name="status" value="active" {% if val.status == 'active' % } selected  {% endif %}>
                     <label for="active">Active</label>
 
-                    <input type="radio" id="inactive" name="status" value="inactive">
+                    <input type="radio" id="inactive" name="status" value="inactive" {% if val.status == 'inactive' % } selected  {% endif %}>>
                     <label for="inactive">Inactive</label>
                 </div>
             </div>

@@ -15,6 +15,16 @@
         <h2>add staff</h2>
         <form action=" " method="post">
             {%csrf_token %}
+            
+        <div class="form-group">
+            <label for="route">ROUTE:</label>
+            <select name="route" id="route" placeholder="route">
+                <option value="" disabled selected>select the route</option>
+                {% for i in val %}
+                <option value="{{i.id}}">{{i.route}}</option>
+                {% endfor %}
+            </select>
+            </div>
         
             <label for="name">Name:</label>
             <input type="text" id="name" name="Name" required>
@@ -22,8 +32,8 @@
             <label for="id">ID:</label>
             <input type="text" id="id" name="staffid" required>
 
-            <label for="route">Route</label>
-            <input type="text" id="route" name="route" required>
+            <!-- <label for="route">Route</label>
+            <input type="text" id="route" name="route" required> -->
 
             <label for="PH.No">PH.No</label>
             <input type="text" id="PH.No" name="phoneno" required>

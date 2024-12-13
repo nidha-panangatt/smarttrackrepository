@@ -27,10 +27,59 @@
                 <label for="department">Department:</label>
                 <input type="text" id="department" name="department"  value="{{val.department }}"required>
             </div>
+            
+            <div class="form-group">
+                <label for="department">Department:</label>
+                <input type="text" id="department" name="department"  value="{{val.department }}"required>
+            </div>
+            <div class="form-group">
+                <label for="semester">Semester:</label>
+                <input type="text" id="semester" name="sem" value="{{val.sem}}" required>
+            </div>
             <div class="form-group">
                 <label for="email">Email ID:</label>
                 <input type="email" id="email" name="email" value="{{val.email }}" required>
             </div>
+            <div class="form-group">
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="text" name="dob" value="{{val.dob }}"  required>
+            </div>
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <input type="text" id="address" name="address" value="{{val.address }}"  required>
+            </div>
+            <div class="form-group">
+                <label for="place">Place:</label>
+                <input type="text" id="place" name="place" value="{{val.place }}" required>
+            </div>
+            <div class="form-group">
+                <label for="ph_no">Phone No:</label>
+                <input type="text" id="ph_no" name="ph_no" value="{{val.ph_no }}"  required>
+            </div>
+            <div class="form-group">
+                <label for="guardian">Guardian:</label>
+                <input type="text" id="guardian" name="guardianname" value="{{val.guardianname }}"  required>
+            </div>
+            <div class="form-group">
+                <label for="guardian-phone">Guardian's Phone No:</label>
+                <input type="text" id="guardian-phone" name="phoneno" value="{{val.phoneno }}"  required>
+            </div>
+            <div class="form-group">
+                <label for="commuter-type">Commuter Type:</label>
+                <select id="commuter-type" name="commuter_type">
+                    <option value="hostelers">Hostelers</option>
+                    <option value="daily-commuters">Daily Commuters</option>
+                </select>
+            </div>
+            <div id="transportation-type" class="form-group">
+                <label for="transportation-type">Transportation Type:</label>
+                <select id="transportation-select" name="transportation_type">
+                    <option value="by college bus">By College Bus</option>
+                    <option value="by own vehicle">By Own Vehicle</option>
+                    <option value="by public /walk">By Public/Walk</option>
+                </select>
+            </div>
+
             <button type="submit" class="submit-btn">Submit</button>
       
     </div>

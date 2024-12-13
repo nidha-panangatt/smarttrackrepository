@@ -186,14 +186,18 @@
         <div class="form-group">
             <label for="departmentFilter"></label>
             <select id="departmentFilter" onchange="handleSelectChange()">
-                <option value=" ">--Select Department--</option>
-                <option value="cs">cs</option>
-                <option value="english">english</option>
-                <option value="as">as</option>
-            </select>
-        </div>
+               
+            
+            
+                    <option value="">--Select departement--</option>
+                    {% for i in department %}
+                    <option value="{{i.id}}">{{i.department}}</option>
+             
+                    {% endfor %}
+                    
+       
     </div>
-
+</select>
     <!-- Embedding view_students.html -->
     <div class="iframe-container">
         <iframe id="studentsIframe" src="" style="width: 100%; height: 600px; border: none;"></iframe>

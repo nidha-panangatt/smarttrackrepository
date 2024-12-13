@@ -43,10 +43,6 @@ class UserLogin(View):
                         )
 
             user_type = authenticated.user_type
-
-
-
-
             print("hai")
             print(user)
             print(user_type)

@@ -68,9 +68,10 @@ class RouteTable(models.Model):
     updated_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     
 class BusdetailsTable(models.Model): 
-    route=models.CharField(max_length=10,null=True,blank=True)
-    vehicleno=models.CharField(max_length=20,null=True,blank=True)
-    staff=models.CharField(max_length=30,null=True,blank=True)
+    route=models.ForeignKey(RouteTable, on_delete=models.CASCADE,null=True,blank=True) 
+    station=models.CharField(max_length=100,null=True,blank=True)
+    vehicleno=models.CharField(max_length=50,null=True,blank=True)
+    capacity=models.BigIntegerField(null=True,blank=True)
     created_at=models.DateTimeField(auto_now_add=True, null=True, blank=True)
     updated_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     
@@ -93,6 +94,11 @@ class AddstudentTable(models.Model):
 class TranspoTable(models.Model):
     STUDENT = models.ForeignKey(StudentTable, on_delete=models.CASCADE)
     status=models.CharField(max_length=10,null=True,blank=True)
+
+class PaymentTable(models.Model):
+    STUDENT = models.ForeignKey(AddstudentTable, on_delete=models.CASCADE)
+    date=models.CharField(max_length=10,null=True,blank=True)
+    STATION=models.ForeignKey(StationTable, on_delete=models.CASCADE)
 
 
 
