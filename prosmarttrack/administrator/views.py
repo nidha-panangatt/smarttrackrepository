@@ -4,6 +4,8 @@ from django.urls import reverse
 from django.views import View
 from django.http import HttpResponse, JsonResponse
 
+from prosmarttrack.administrator.serializer import Studentdetailserializer
+
 from .models import *
 from .form import *
 
@@ -620,7 +622,16 @@ class viewsPendingfee(View):
         return render(request, 'administrator/notification/pending.html') 
      
 
-# //////////////student api//////////
+# //////////////teacher api//////////
+
+
+class ViewStudentdetails(APIView):
+    def get(self,request):
+        details = StudentTable.objects.all()
+        details_serializer = Studentdetailserializer(details,many=True)
+        return Response(details_serializer.data)
+    
+    
     
       
       

@@ -95,10 +95,32 @@ class TranspoTable(models.Model):
     STUDENT = models.ForeignKey(StudentTable, on_delete=models.CASCADE)
     status=models.CharField(max_length=10,null=True,blank=True)
 
+
+class  LabTable(models.Model):
+    labname=models.CharField(max_length=10,null=True,blank=True)
+
+
+class LabattendanceTable(models.Model):
+    STUDENT = models.ForeignKey(StudentTable, on_delete=models.CASCADE)
+    entrytime=models.DateTimeField(null=True, blank=True)
+    exittime=models.DateTimeField(null=True, blank=True)
+    period=models.CharField(max_length=10,null=True,blank=True)
+    status=models.CharField(max_length=10,null=True,blank=True)
+    LAB=models.ForeignKey(LabTable, on_delete=models.CASCADE)
+
+
+
 class PaymentTable(models.Model):
-    STUDENT = models.ForeignKey(AddstudentTable, on_delete=models.CASCADE)
+    id=models.AutoField(primary_key=True)
+    account_number=models.CharField(max_length=50)
+    IFSC=models.CharField(max_length=50)
+    key=models.CharField(max_length=50)
+    amount=models.DecimalField(max_digits=10,decimal_places=2)
+    STUDENT = models.ForeignKey(AddstudentTable, on_delete=models.CASCADE,blank=True,null=True)
     date=models.CharField(max_length=10,null=True,blank=True)
-    STATION=models.ForeignKey(StationTable, on_delete=models.CASCADE)
+    STATION=models.ForeignKey(StationTable, on_delete=models.CASCADE,blank=True,null=True)
+    mode=models.CharField(max_length=50)
+
 
 
 
