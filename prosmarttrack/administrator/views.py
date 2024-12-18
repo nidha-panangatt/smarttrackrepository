@@ -3,8 +3,11 @@ from django.shortcuts import render,redirect
 from django.urls import reverse
 from django.views import View
 from django.http import HttpResponse, JsonResponse
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from .serializers import Busattendanceserializer, Fineserializer, Gatedetailsserializer, Labattendanceserializer, Labdetailsserializer, Parentprofileserializer, Paymenthistoryserializer, Studentdetailserializer, Teacherprofileserializer
 
-from prosmarttrack.administrator.serializer import Studentdetailserializer
+# from prosmarttrack.administrator.serializer import Labattendanceserializer, Labdetailsserializer, Studentdetailserializer
 
 from .models import *
 from .form import *
@@ -620,7 +623,17 @@ class viewsUnauthorizedaccess(View):
 class viewsPendingfee(View):
      def get(self,request):
         return render(request, 'administrator/notification/pending.html') 
+         
+class viewsPayment(View):
+     def get(self,request):
+        return render(request, 'administrator/payment.html') 
      
+     
+# class viewsLabdetails(View):
+#      def get(self,request):
+#         return render(request, 'administrator/notification/pending.html') 
+
+
 
 # //////////////teacher api//////////
 
@@ -632,6 +645,105 @@ class ViewStudentdetails(APIView):
         return Response(details_serializer.data)
     
     
+class viewsLabdetails(APIView):
+      def get(self,request):
+        Labdetails = LabTable.objects.all()
+        Labdetails_serializer = Labdetailsserializer(Labdetails,many=True)
+        return Response(Labdetails_serializer.data)
+      
     
+class ViewLabattendance(APIView):
+      def get(self,request):
+        labattendance = LabattendanceTable.objects.all()
+        labattendance_serializer = Labattendanceserializer(labattendance,many=True)
+        return Response(labattendance_serializer.data)
+
+class ViewGate(APIView):
+      def get(self,request):
+        gatedetails = GateTable.objects.all()
+        gatedetails_serializer = Gatedetailsserializer(gatedetails,many=True)
+        return Response(gatedetails_serializer.data)
+      
+
+class ViewTeacherprofile(APIView):
+      def get(self,request):
+        teacherprofile =TeacherTable.objects.all()
+        teacherprofile_serializer = Teacherprofileserializer(teacherprofile,many=True)
+        return Response(teacherprofile_serializer.data)
+      
+ ##########parent api######### 
+ # 
+class ViewParentprofile(APIView):
+      def get(self,request):
+        parentprofile =GuardianTable.objects.all()
+        parentprofile_serializer = Parentprofileserializer(parentprofile,many=True)
+        return Response(parentprofile_serializer.data)  
+
+class ViewFine(APIView):
+      def get(self,request):
+        fine =FineTable.objects.all()
+        fine_serializer = Fineserializer(fine,many=True)
+        return Response(fine_serializer.data)   
+
+
+class ViewsPaymenthistory(APIView):
+      def get(self,request):
+        paymenthistory =PaymentTable.objects.all()
+        paymenthistory_serializer = Paymenthistoryserializer(paymenthistory,many=True)
+        return Response(paymenthistory_serializer.data)   
+            
+class ViewBusattendance(APIView):
+      def get(self,request):
+        busattendance = BusattendanceTable.objects.all()
+        busattendance_serializer = Busattendanceserializer(busattendance,many=True)
+        return Response(busattendance_serializer.data)
+
+
+
+      
+            
+
       
       
+# class viewsPayment(View):
+#      def get(self,request):
+#         return render(request, 'administrator/payment.html') 
+#      def generate_account_details(request):
+#             accntnumber=""
+#             key=""
+#             ifsc =""
+#             list_of_chars ="1234567890"
+#             accntnumber_length="3"
+#             key_length =3
+#             for i in range(accntnumber_length):
+#               accntnumber += random.choice(list_of_chars)
+#               for i in range(key_length):
+#                     key += random.choice(list_of_chars)
+#                     ifsc = "SBTR000055"
+#                     amt = "500000"
+#                     account_details = {
+#                         'account_number': accntnumber,
+#                         'key': key,
+#                         'IFSC': ifsc,
+#                         'amount': amt,
+#                         }
+#             account_obj=STUDENTaccount()
+#             account_obj.STUDENT = User.objects.get(id=request.session['u_id'])
+#             account_obj.account_number=accntnumber
+#             account_obj.key=key
+#             account_obj.IFSC =ifsc
+#             account_obj.amount=amt 
+#             account_obj.mode=mode
+#             account_obj.save()
+#          messages.success(request, 'Registration successful.')
+#      return HttpResponse(''''<script›alert ("Registration successful."); window.location="/cus _login"</script›''')
+
+# def payment_page(request):
+#     request.session[ 'total_charge'] = request.POST[ 'total_charge'] 
+#     request. session[ 'student_id'] =request.POST['student_id']
+#     request.session['quantity'] - request.POST[ 'quantity']
+#     total = request.POST[ 'total_charge']
+#     print ("^^^^^^^^^^^^^^^6", request. POST)
+#     print("$$$$$$$$$$$$$$$", total)
+#     account_obj = studentaccount.objects.get (student_id-request.session['user_id'])
+#     return render (request, "user/payment.html", {'account_obj': account_obj,'total': total})

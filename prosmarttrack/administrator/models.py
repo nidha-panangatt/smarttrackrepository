@@ -17,7 +17,7 @@ class StudentTable(models.Model):
     phoneno=models.BigIntegerField(null=True,blank=True)
     commuter_type=models.CharField(max_length=20,null=True,blank=True)
     transportation_type=models.CharField(max_length=20,null=True,blank=True)
-    route=models.CharField(max_length=20,null=True,blank=True)
+    # route=models.CharField(max_length=20,null=True,blank=True)
    
     created_at=models.DateTimeField(auto_now_add=True, null=True, blank=True)
     updated_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
@@ -96,6 +96,10 @@ class TranspoTable(models.Model):
     status=models.CharField(max_length=10,null=True,blank=True)
 
 
+
+
+
+
 class  LabTable(models.Model):
     labname=models.CharField(max_length=10,null=True,blank=True)
 
@@ -107,6 +111,16 @@ class LabattendanceTable(models.Model):
     period=models.CharField(max_length=10,null=True,blank=True)
     status=models.CharField(max_length=10,null=True,blank=True)
     LAB=models.ForeignKey(LabTable, on_delete=models.CASCADE)
+
+class GateTable(models.Model):
+    STUDENT = models.ForeignKey(StudentTable, on_delete=models.CASCADE)
+    date=models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    entrytime=models.DateTimeField(null=True, blank=True)
+    exittime=models.DateTimeField(null=True, blank=True)
+
+    
+
+
 
 
 
@@ -122,6 +136,17 @@ class PaymentTable(models.Model):
     mode=models.CharField(max_length=50)
 
 
+class FineTable(models.Model):
+    reason=models.CharField(max_length=1000,null=True,blank=True)
+    date=models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    amount=models.BigIntegerField(null=True,blank=True)
+
+class BusattendanceTable(models.Model):
+    STUDENT = models.ForeignKey(StudentTable, on_delete=models.CASCADE)
+    date=models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    entrytime=models.DateTimeField(null=True, blank=True)
+    exittime=models.DateTimeField(null=True, blank=True)
+    STATION=models.ForeignKey(StationTable, on_delete=models.CASCADE)
 
 
 

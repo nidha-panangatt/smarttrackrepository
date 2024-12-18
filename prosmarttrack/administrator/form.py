@@ -38,7 +38,7 @@ class StudentForm(ModelForm):
     class Meta:
         model = StudentTable
         fields = ['Name', 'admissionno', 'department', 'email','sem','dob','address','place','ph_no',
-                  'guardianname','phoneno','transportation_type','commuter_type','route'
+                  'guardianname','phoneno','transportation_type','commuter_type'
                 ]
         
 class TranspoForm(ModelForm):
@@ -56,15 +56,18 @@ class BusdetailForm(ModelForm):
         model = BusdetailsTable
         fields = ['route','station', 'vehicleno','capacity']  
 
-class LabForm(ModelForm):
-    class Meta :
-        model=LabTable
-        fields=['labname']
 
-class LabattendanceForm(ModelForm):
-    class Meta :
-        model=LabattendanceTable
-        fields=['STUDENT','entrytime','exittime','period','status','LAB']
+
+
+# class LabForm(ModelForm):
+#     class Meta :
+#         model=LabTable
+#         fields=['labname']
+
+# class LabattendanceForm(ModelForm):
+#     class Meta :
+#         model=LabattendanceTable
+#         fields=['STUDENT','entrytime','exittime','period','status','LAB']
 
 
 class PaymentForm(ModelForm):

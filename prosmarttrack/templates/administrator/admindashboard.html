@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
+
     <link rel="stylesheet" href="{% static 'main.css' %}">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
@@ -47,8 +49,8 @@
             <li>
                 <a href="{% url 'vbusco_page' %}">
 
-                    <i class="fa-solid fa-user-plus"></i>
-                     <span class="links_name">Bus Coordinators</span>
+                    <i class="fa-solid fa-clipboard-user"></i>
+                    <span class="links_name">Bus Coordinators</span>
                 </a>
                 <span class="tooltip">Bus Coordinator</span>
             </li>
@@ -64,8 +66,7 @@
             </li>
             <li> 
                 <a href="{% url 'vbusdetail_page' %}">
-
-                    <i class='bx bx-bus icon'></i>
+                    <i class='bx bx-info-circle'></i>
                     <span class="links_name"> Bus Details</span>
                 </a>
                 <span class="tooltip"> Bus Details</span>
@@ -74,7 +75,7 @@
 
             <li>
                 <a href="{% url 'transportationss' %}" onclick="loadContent('transportation.html')">
-                    <i class='bx bx-money icon'></i>
+                    <i class='bx bx-bus icon'></i>
                     <span class="links_name">Transportation</span>
                 </a>
                 <span class="tooltip">Transportation</span>
@@ -88,30 +89,38 @@
             </li>
           
              <li>
-                <a href="{% url 'entryexitpage' %}" onclick="loadContent('.html')">
-                    <i class='bx bx-current-location icon'></i>
-                    <span class="links_name">entry/exit</span>
+                <a href="{% url 'entryexitpage' %}" onclick="loadContent('entry.html')">
+                    <i class="fa-solid fa-exchange-alt"></i>
+                    <span class="links_name">Entry/Exit</span>
                 </a>
+                <span class="tooltip">Entry/Exit</span>
+
              </li>   
              <li>
-                <a href="{% url 'notifications' %}"onclick="loadContent('payment.html')">
-                    <i class='bx bx-bell'></i>
-                    <span class="links_name">payment</span>
+                <a href="{% url 'payment' %}"onclick="loadContent('payment.html')">
+                    <i class='bx bx-money'></i>
+                    <span class="links_name">Payment</span>
                 </a>
-            <li>
-            <li>
-                <a href="{% url 'notifications' %}"onclick="loadContent('notification.html')">
-                    <i class='bx bx-bell'></i>
-                    <span class="links_name">notification</span>
-                </a>
-           
-            
+                <span class="tooltip">Payment</span>
+
+             </li>
+             <li>
                 <a href="#" onclick="loadContent('.html')">
                     <i class='bx bx-current-location icon'></i>
                     <span class="links_name">Live Location</span>
                 </a>
                 <span class="tooltip">Live Location</span>
             </li>
+            <li>
+                <a href="{% url 'notifications' %}"onclick="loadContent('notification.html')">
+                    <i class='bx bx-bell'></i>
+                    <span class="links_name">notification</span>
+                </a>
+                <span class="tooltip">Notification</span>
+
+           
+            </li>
+            
             <li>
                 <a href="#" onclick="loadContent('.html')">
                     <i class='bx bx-log-out'></i>

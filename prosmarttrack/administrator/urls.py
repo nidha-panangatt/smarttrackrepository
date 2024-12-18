@@ -86,7 +86,31 @@ urlpatterns = [
     path('pending/',viewsPendingfee.as_view(), name='pending_fee'),
     # path('routedetails/<str:route>/',viewsRoutedetails.as_view(), name='routedetails'),
     path('entry/',viewsEntryexit.as_view(), name='entryexitpage'),
+    path('payment/', viewsPayment.as_view(), name='payment'),
+   
+
+    ########################teacher api#############################################
+    path('labs/', viewsLabdetails.as_view(), name='labs'),
+    path('studentdetails/', ViewStudentdetails.as_view(), name='studentdetails'),
+    path('lab-attendance/', ViewLabattendance.as_view(), name='lab_attendance'),
+    path('gate/',ViewGate.as_view(),name='gate'),
+    path('teacherprofile/',ViewTeacherprofile.as_view(),name='teacherprofile'),
+
+    ########################parent api ##########################################
+
+     path('parentprofile/',ViewParentprofile.as_view(),name='parentprofile'),
+     path('fine/',ViewFine.as_view(),name='fine'),
+     path('paymenthistory/', ViewsPaymenthistory.as_view(), name='paymenthistory'),
+     path('bus-attendance/', ViewBusattendance.as_view(), name='bus_attendance'),
+     
+
+
     
+    
+   
+    
+    
+
 ]
 
 
